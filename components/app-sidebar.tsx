@@ -55,7 +55,6 @@ export function AppSidebar() {
                         ? pathname === "/"
                         : pathname.startsWith(item.href)
                     }
-                    tooltip={item.title}
                   >
                     <item.icon className="size-4" />
                     <span>{item.title}</span>

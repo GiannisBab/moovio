@@ -24,7 +24,7 @@ export function LiveMap() {
   const [filters, setFilters] = useState<MapFilters>({
     showCongestion: true,
     showRoutes: true,
-    showVehicles: true,
+    showVehicles: false,
     congestionSeverity: ["critical", "warning", "info"],
   })
   const [panelOpen, setPanelOpen] = useState(true)

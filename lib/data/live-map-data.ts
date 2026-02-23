@@ -50,17 +50,6 @@ export const congestionPoints: CongestionPoint[] = [
   },
   {
     id: "cp-2",
-    longitude: 23.7282,
-    latitude: 37.9842,
-    location: "Omonia Square",
-    severity: "warning",
-    description: "Construction zone on Stadiou St reducing traffic to single lane.",
-    avgSpeed: 15,
-    delayMinutes: 20,
-    time: "12 min ago",
-  },
-  {
-    id: "cp-3",
     longitude: 23.749,
     latitude: 37.992,
     location: "Kifissias Ave & Alexandras",
@@ -71,7 +60,7 @@ export const congestionPoints: CongestionPoint[] = [
     time: "1 min ago",
   },
   {
-    id: "cp-4",
+    id: "cp-3",
     longitude: 23.644,
     latitude: 37.943,
     location: "Piraeus Port Entrance",
@@ -82,7 +71,7 @@ export const congestionPoints: CongestionPoint[] = [
     time: "18 min ago",
   },
   {
-    id: "cp-5",
+    id: "cp-4",
     longitude: 23.778,
     latitude: 37.99,
     location: "Attiki Odos — Katechaki Exit",
@@ -93,44 +82,11 @@ export const congestionPoints: CongestionPoint[] = [
     time: "25 min ago",
   },
   {
-    id: "cp-6",
-    longitude: 23.715,
-    latitude: 37.912,
-    location: "Vouliagmenis Ave — Alimos",
-    severity: "warning",
-    description: "Event at Alimos Marina causing unusual evening congestion.",
-    avgSpeed: 18,
-    delayMinutes: 15,
-    time: "8 min ago",
-  },
-  {
-    id: "cp-7",
-    longitude: 23.731,
-    latitude: 37.988,
-    location: "Patision & 28th October St",
-    severity: "info",
-    description: "Minor congestion from double-parked delivery vehicles.",
-    avgSpeed: 22,
-    delayMinutes: 8,
-    time: "32 min ago",
-  },
-  {
-    id: "cp-8",
-    longitude: 23.76,
-    latitude: 38.02,
-    location: "National Road — Lamia Direction",
-    severity: "info",
-    description: "Scheduled road maintenance on northbound lanes. Minor delays.",
-    avgSpeed: 35,
-    delayMinutes: 5,
-    time: "1 hr ago",
-  },
-  {
-    id: "cp-9",
+    id: "cp-5",
     longitude: 23.6985,
     latitude: 37.9685,
     location: "Iera Odos — Egaleo",
-    severity: "critical",
+    severity: "warning",
     description: "Overturned truck blocking 2 of 3 lanes. Emergency services on scene.",
     avgSpeed: 6,
     delayMinutes: 50,
@@ -155,20 +111,6 @@ export const trafficRoutes: TrafficRoute[] = [
     ],
   },
   {
-    id: "route-vouliagmenis",
-    name: "Vouliagmenis Avenue",
-    congestionLevel: "moderate",
-    avgSpeed: 25,
-    coordinates: [
-      [23.7290, 37.9680],
-      [23.7260, 37.9580],
-      [23.7230, 37.9490],
-      [23.7200, 37.9380],
-      [23.7170, 37.9280],
-      [23.7150, 37.9180],
-    ],
-  },
-  {
     id: "route-alexandras",
     name: "Alexandras Avenue",
     congestionLevel: "gridlock",
@@ -180,19 +122,6 @@ export const trafficRoutes: TrafficRoute[] = [
       [23.7420, 37.9910],
       [23.7490, 37.9920],
       [23.7560, 37.9930],
-    ],
-  },
-  {
-    id: "route-patision",
-    name: "Patision Street",
-    congestionLevel: "moderate",
-    avgSpeed: 20,
-    coordinates: [
-      [23.7310, 37.9840],
-      [23.7315, 37.9900],
-      [23.7320, 37.9960],
-      [23.7325, 38.0020],
-      [23.7330, 38.0080],
     ],
   },
   {
@@ -243,16 +172,14 @@ function generateVehicleClusterData(): GeoJSON.FeatureCollection<
 
   // Center clusters around key Athens areas
   const clusters = [
-    { lng: 23.7275, lat: 37.9838, weight: 0.4, spread: 0.015 }, // City center
-    { lng: 23.749, lat: 37.992, weight: 0.2, spread: 0.01 },    // Kifissias corridor
-    { lng: 23.644, lat: 37.943, weight: 0.15, spread: 0.012 },  // Piraeus
-    { lng: 23.715, lat: 37.912, weight: 0.1, spread: 0.01 },    // Alimos
-    { lng: 23.76, lat: 38.02, weight: 0.15, spread: 0.02 },     // Northern suburbs
+    { lng: 23.7275, lat: 37.9838, weight: 0.45, spread: 0.015 }, // City center
+    { lng: 23.749, lat: 37.992, weight: 0.25, spread: 0.01 },    // Kifissias corridor
+    { lng: 23.644, lat: 37.943, weight: 0.3, spread: 0.012 },    // Piraeus
   ]
 
   let pointIndex = 0
   for (const cluster of clusters) {
-    const count = Math.round(200 * cluster.weight)
+    const count = Math.round(80 * cluster.weight)
     for (let i = 0; i < count; i++) {
       const seed = pointIndex * 7 + 42
       const r1 = seededRandom(seed)

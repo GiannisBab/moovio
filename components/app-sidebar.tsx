@@ -3,12 +3,12 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
-  Activity,
   LayoutDashboard,
   Map,
   BarChart3,
   BrainCircuit,
 } from "lucide-react"
+import { Logo } from "@/components/logo"
 import {
   Sidebar,
   SidebarHeader,
@@ -37,21 +37,9 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" render={<Link href="/" />}>
-              <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-lg">
-                <Activity className="size-4" />
-              </div>
-              <div className="grid flex-1 text-left leading-tight">
-                <span className="truncate font-semibold">Moovio</span>
-                <span className="truncate text-xs text-muted-foreground">
-                  Smart City Mobility
-                </span>
-              </div>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <Link href="/" className="flex items-center px-2 py-1">
+          <Logo className="h-7 w-auto" />
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

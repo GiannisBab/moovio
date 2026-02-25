@@ -11,7 +11,23 @@ const widthByLevel: Record<TrafficRoute["congestionLevel"], number> = {
   gridlock: 5,
 }
 
-export function TrafficRoutes({ routes }: { routes: TrafficRoute[] }) {
+export type SelectedRoute = {
+  route: TrafficRoute
+  coordinates: [number, number]
+}
+
+function getRouteMidpoint(coordinates: [number, number][]): [number, number] {
+  const mid = Math.floor(coordinates.length / 2)
+  return coordinates[mid]
+}
+
+export function TrafficRoutes({
+  routes,
+  onRouteClick,
+}: {
+  routes: TrafficRoute[]
+  onRouteClick?: (selected: SelectedRoute) => void
+}) {
   return (
     <>
       {routes.map((route) => (
@@ -22,6 +38,15 @@ export function TrafficRoutes({ routes }: { routes: TrafficRoute[] }) {
           color={congestionLevelColors[route.congestionLevel]}
           width={widthByLevel[route.congestionLevel]}
           opacity={0.85}
+          onClick={
+            onRouteClick
+              ? () =>
+                  onRouteClick({
+                    route,
+                    coordinates: getRouteMidpoint(route.coordinates),
+                  })
+              : undefined
+          }
         />
       ))}
     </>

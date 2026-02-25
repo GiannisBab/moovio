@@ -1,17 +1,35 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useMemo } from "react"
 import { Map, MapControls, MapPopup } from "@/components/ui/map"
 import { CongestionMarkers } from "./congestion-markers"
-import { TrafficRoutes } from "./traffic-routes"
+import { TrafficRoutes, type SelectedRoute } from "./traffic-routes"
 import { VehicleClusters, type SelectedVehicle } from "./vehicle-clusters"
 import { MapOverlayPanel, type MapFilters } from "./map-overlay-panel"
+import { TrafficHeatmap } from "./traffic-heatmap"
+import { IncidentMarkers } from "./incident-markers"
+import { TransitStopMarkers } from "./transit-stop-markers"
+import { CameraFeedMarkers } from "./camera-feeds"
 import {
   congestionPoints,
   trafficRoutes,
   vehicleClusterData,
+  heatmapData,
+  incidents,
+  transitStops,
+  trafficCameras,
+  generateHistoricalSnapshot,
+  type TrafficRoute,
 } from "@/lib/data/live-map-data"
-import { Bus, Car, CarTaxiFront, Gauge, Radio } from "lucide-react"
+import {
+  Bus,
+  Car,
+  CarTaxiFront,
+  Gauge,
+  Radio,
+  Route,
+} from "lucide-react"
+import { congestionLevelColors } from "@/lib/data/live-map-data"
 
 const vehicleTypeConfig = {
   bus: { icon: Bus, label: "Bus" },
@@ -25,22 +43,47 @@ export function LiveMap() {
     showCongestion: true,
     showRoutes: true,
     showVehicles: false,
+    showHeatmap: false,
+    showIncidents: true,
+    showTransitStops: false,
+    showCameras: true,
     congestionSeverity: ["critical", "warning", "info"],
   })
   const [panelOpen, setPanelOpen] = useState(true)
   const [selectedVehicle, setSelectedVehicle] =
     useState<SelectedVehicle | null>(null)
+  const [selectedRoute, setSelectedRoute] = useState<SelectedRoute | null>(null)
+  const [timeHour, setTimeHour] = useState<number | null>(null)
+  const [timePlaying, setTimePlaying] = useState(false)
 
-  const filteredCongestion = congestionPoints.filter((p) =>
+  const snapshot = useMemo(
+    () => (timeHour !== null ? generateHistoricalSnapshot(timeHour) : null),
+    [timeHour]
+  )
+
+  const activeCongestion = snapshot?.congestionPoints ?? congestionPoints
+  const activeIncidents = snapshot?.incidents ?? incidents
+  const activeRoutes = snapshot?.trafficRoutes ?? trafficRoutes
+  const activeVehicles = snapshot?.vehicleClusterData ?? vehicleClusterData
+  const activeHeatmap = snapshot?.heatmapData ?? heatmapData
+
+  const filteredCongestion = activeCongestion.filter((p) =>
     filters.congestionSeverity.includes(p.severity)
   )
 
   const handlePointClick = useCallback((vehicle: SelectedVehicle) => {
+    setSelectedRoute(null)
     setSelectedVehicle(vehicle)
+  }, [])
+
+  const handleRouteClick = useCallback((selected: SelectedRoute) => {
+    setSelectedVehicle(null)
+    setSelectedRoute(selected)
   }, [])
 
   const handleClosePopup = useCallback(() => {
     setSelectedVehicle(null)
+    setSelectedRoute(null)
   }, [])
 
   return (
@@ -57,17 +100,34 @@ export function LiveMap() {
           showZoom
           showCompass
           showLocate
+          showFullscreen
         />
+
+        {filters.showHeatmap && <TrafficHeatmap data={activeHeatmap} />}
 
         {filters.showCongestion && (
           <CongestionMarkers points={filteredCongestion} />
         )}
 
-        {filters.showRoutes && <TrafficRoutes routes={trafficRoutes} />}
+        {filters.showRoutes && (
+          <TrafficRoutes routes={activeRoutes} onRouteClick={handleRouteClick} />
+        )}
+
+        {filters.showTransitStops && (
+          <TransitStopMarkers stops={transitStops} />
+        )}
+
+        {filters.showIncidents && (
+          <IncidentMarkers incidents={activeIncidents} />
+        )}
+
+        {filters.showCameras && (
+          <CameraFeedMarkers cameras={trafficCameras} />
+        )}
 
         {filters.showVehicles && (
           <VehicleClusters
-            data={vehicleClusterData}
+            data={activeVehicles}
             onPointClick={handlePointClick}
           />
         )}
@@ -82,6 +142,17 @@ export function LiveMap() {
             <VehiclePopupContent vehicle={selectedVehicle} />
           </MapPopup>
         )}
+
+        {selectedRoute && (
+          <MapPopup
+            longitude={selectedRoute.coordinates[0]}
+            latitude={selectedRoute.coordinates[1]}
+            closeButton
+            onClose={handleClosePopup}
+          >
+            <RoutePopupContent route={selectedRoute.route} />
+          </MapPopup>
+        )}
       </Map>
 
       <MapOverlayPanel
@@ -89,7 +160,46 @@ export function LiveMap() {
         onOpenChange={setPanelOpen}
         filters={filters}
         onFiltersChange={setFilters}
+        timeHour={timeHour}
+        onTimeHourChange={setTimeHour}
+        timePlaying={timePlaying}
+        onTimePlayingChange={setTimePlaying}
       />
+    </div>
+  )
+}
+
+const congestionLevelLabels: Record<string, string> = {
+  free: "Free Flow",
+  moderate: "Moderate",
+  heavy: "Heavy",
+  gridlock: "Gridlock",
+}
+
+function RoutePopupContent({ route }: { route: TrafficRoute }) {
+  const level = route.congestionLevel
+  const color = congestionLevelColors[level]
+
+  return (
+    <div className="w-48 space-y-2">
+      <div className="flex items-center gap-2">
+        <div
+          className="flex items-center justify-center size-7 rounded-full"
+          style={{ backgroundColor: `${color}15` }}
+        >
+          <Route className="size-4" style={{ color }} />
+        </div>
+        <div>
+          <p className="text-sm font-semibold">{route.name}</p>
+          <p className="text-[10px] text-muted-foreground" style={{ color }}>
+            {congestionLevelLabels[level]}
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Gauge className="size-3" />
+        {route.avgSpeed} km/h avg
+      </div>
     </div>
   )
 }

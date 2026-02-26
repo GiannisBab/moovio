@@ -7,6 +7,7 @@ import {
   Map,
   BarChart3,
   BrainCircuit,
+  Github,
 } from "lucide-react"
 import { Logo } from "@/components/logo"
 import {
@@ -23,6 +24,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { buttonVariants } from "@/components/ui/button"
 
 const navItems = [
   { title: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -67,7 +69,15 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <div className="flex items-center justify-between px-2">
-          <span className="text-xs text-muted-foreground">Theme</span>
+          <a
+            href="https://github.com/GiannisBab/moovio"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className={buttonVariants({ variant: "ghost", size: "icon-sm" })}
+          >
+            <Github className="size-4" />
+          </a>
           <ThemeToggle />
         </div>
       </SidebarFooter>

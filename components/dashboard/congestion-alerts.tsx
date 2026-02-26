@@ -1,13 +1,15 @@
+import Link from "next/link"
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
+  CardAction,
   CardContent,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { AlertTriangle, AlertCircle, Info, Clock } from "lucide-react"
+import { AlertTriangle, AlertCircle, Info, Clock, ArrowRight } from "lucide-react"
 import type { CongestionAlert } from "@/lib/data/dashboard-data"
 import { cn } from "@/lib/utils"
 
@@ -42,8 +44,19 @@ export function CongestionAlerts({
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Congestion Alerts</CardTitle>
-        <CardDescription>Active incidents and warnings</CardDescription>
+        <div>
+          <CardTitle>Congestion Alerts</CardTitle>
+          <CardDescription>Active incidents and warnings</CardDescription>
+        </div>
+        <CardAction>
+          <Link
+            href="/live-map"
+            className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            View all
+            <ArrowRight className="size-3" />
+          </Link>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <div className="space-y-0">

@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
+import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import {
   AlertTriangle,
@@ -22,6 +23,14 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Kbd } from "@/components/ui/kbd"
 import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import {
   CommandDialog,
   Command,
   CommandInput,
@@ -35,6 +44,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { cn } from "@/lib/utils"
 import { congestionAlerts } from "@/lib/data/dashboard-data"
 import { incidents } from "@/lib/data/live-map-data"
 
@@ -65,7 +75,7 @@ const severityVariant: Record<string, "destructive" | "outline" | "secondary"> =
   info: "secondary",
 }
 
-const notifications = [
+const allNotifications = [
   ...incidents.map((inc) => ({
     id: inc.id,
     title: inc.title,
@@ -85,7 +95,6 @@ const notifications = [
     href: "/",
   })),
 ].sort((a, b) => {
-  // rough sort: "min ago" < "hour ago"
   const extractMinutes = (t: string) => {
     const m = t.match(/(\d+)\s*min/)
     const h = t.match(/(\d+)\s*h/)
@@ -99,6 +108,15 @@ export function Header() {
   const router = useRouter()
   const title = pageTitles[pathname] ?? "Dashboard"
   const [searchOpen, setSearchOpen] = useState(false)
+  const [readIds, setReadIds] = useState<Set<string>>(new Set())
+  const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set())
+
+  const visibleNotifications = allNotifications.filter(
+    (n) => !dismissedIds.has(n.id)
+  )
+  const unreadCount = visibleNotifications.filter(
+    (n) => !readIds.has(n.id)
+  ).length
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -119,20 +137,51 @@ export function Header() {
     [router]
   )
 
+  const handleMarkAllRead = useCallback(() => {
+    setReadIds(new Set(visibleNotifications.map((n) => n.id)))
+  }, [visibleNotifications])
+
+  const handleClearAll = useCallback(() => {
+    setDismissedIds(new Set(allNotifications.map((n) => n.id)))
+  }, [])
+
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b px-4">
       <SidebarTrigger />
       <Separator orientation="vertical" className="h-6" />
-      <h1 className="text-lg font-semibold">{title}</h1>
+
+      {/* Breadcrumbs */}
+      <Breadcrumb>
+        <BreadcrumbList>
+          {pathname === "/" ? (
+            <BreadcrumbItem>
+              <BreadcrumbPage>Dashboard</BreadcrumbPage>
+            </BreadcrumbItem>
+          ) : (
+            <>
+              <BreadcrumbItem>
+                <BreadcrumbLink render={<Link href="/" />}>
+                  Home
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </>
+          )}
+        </BreadcrumbList>
+      </Breadcrumb>
+
       <div className="ml-auto flex items-center gap-2">
-        {/* Search */}
+        {/* Search — icon-only on mobile, full bar on md+ */}
         <button
           onClick={() => setSearchOpen(true)}
-          className="border-input bg-muted/40 text-muted-foreground hover:bg-muted flex h-8 w-56 items-center gap-2 rounded-md border px-3 text-sm transition-colors"
+          className="border-input bg-muted/40 text-muted-foreground hover:bg-muted flex h-8 w-8 items-center justify-center gap-2 rounded-md border text-sm transition-colors md:w-56 md:justify-start md:px-3"
         >
           <Search className="size-3.5 shrink-0" />
-          <span className="flex-1 text-left">Search...</span>
-          <Kbd>⌘K</Kbd>
+          <span className="hidden flex-1 text-left md:inline">Search...</span>
+          <Kbd className="hidden md:inline">⌘K</Kbd>
         </button>
 
         <CommandDialog
@@ -219,44 +268,74 @@ export function Header() {
             }
           >
             <Bell className="size-4" />
-            {notifications.length > 0 && (
+            {unreadCount > 0 && (
               <span className="absolute right-1.5 top-1.5 size-2 rounded-full bg-destructive" />
             )}
           </PopoverTrigger>
           <PopoverContent align="end" className="w-96 gap-0 p-0">
             <div className="flex items-center justify-between border-b px-4 py-3">
               <h3 className="text-sm font-semibold">Notifications</h3>
-              <Badge variant="secondary">{notifications.length}</Badge>
+              <div className="flex items-center gap-3">
+                {unreadCount > 0 && (
+                  <button
+                    onClick={handleMarkAllRead}
+                    className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Mark all read
+                  </button>
+                )}
+                {visibleNotifications.length > 0 && (
+                  <button
+                    onClick={handleClearAll}
+                    className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Clear all
+                  </button>
+                )}
+              </div>
             </div>
             <div className="max-h-80 overflow-y-auto">
-              {notifications.map((n) => (
-                <button
-                  key={n.id}
-                  onClick={() => router.push(n.href)}
-                  className="hover:bg-muted flex w-full items-start gap-3 border-b px-4 py-3 text-left last:border-0"
-                >
-                  <n.icon className="text-muted-foreground mt-0.5 size-4 shrink-0" />
-                  <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="truncate text-sm font-medium">
-                        {n.title}
+              {visibleNotifications.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
+                  <Bell className="mb-2 size-8 opacity-30" />
+                  <p className="text-sm">No notifications</p>
+                </div>
+              ) : (
+                visibleNotifications.map((n) => (
+                  <button
+                    key={n.id}
+                    onClick={() => {
+                      setReadIds((prev) => new Set(prev).add(n.id))
+                      router.push(n.href)
+                    }}
+                    className={cn(
+                      "hover:bg-muted flex w-full items-start gap-3 border-b px-4 py-3 text-left last:border-0",
+                      readIds.has(n.id) && "opacity-60"
+                    )}
+                  >
+                    <n.icon className="text-muted-foreground mt-0.5 size-4 shrink-0" />
+                    <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="truncate text-sm font-medium">
+                          {n.title}
+                        </span>
+                        <Badge
+                          variant={severityVariant[n.severity]}
+                          className="shrink-0"
+                        >
+                          {n.severity}
+                        </Badge>
+                      </div>
+                      <span className="text-muted-foreground truncate text-xs">
+                        {n.description}
                       </span>
-                      <Badge
-                        variant={severityVariant[n.severity]}
-                        className="shrink-0"
-                      >
-                        {n.severity}
-                      </Badge>
+                      <span className="text-muted-foreground text-xs">
+                        {n.time}
+                      </span>
                     </div>
-                    <span className="text-muted-foreground truncate text-xs">
-                      {n.description}
-                    </span>
-                    <span className="text-muted-foreground text-xs">
-                      {n.time}
-                    </span>
-                  </div>
-                </button>
-              ))}
+                  </button>
+                ))
+              )}
             </div>
           </PopoverContent>
         </Popover>

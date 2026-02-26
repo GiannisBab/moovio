@@ -5,7 +5,7 @@ import { Map, MapControls, MapPopup } from "@/components/ui/map"
 import { CongestionMarkers } from "./congestion-markers"
 import { TrafficRoutes, type SelectedRoute } from "./traffic-routes"
 import { VehicleClusters, type SelectedVehicle } from "./vehicle-clusters"
-import { MapOverlayPanel, type MapFilters } from "./map-overlay-panel"
+import { MapOverlayPanel, HistoricalPlaybackControl, type MapFilters } from "./map-overlay-panel"
 import { TrafficHeatmap } from "./traffic-heatmap"
 import { IncidentMarkers } from "./incident-markers"
 import { TransitStopMarkers } from "./transit-stop-markers"
@@ -31,6 +31,9 @@ import {
 } from "lucide-react"
 import { congestionLevelColors } from "@/lib/data/live-map-data"
 
+const DEFAULT_CENTER: [number, number] = [23.7275, 37.9838]
+const DEFAULT_ZOOM = 12
+
 const vehicleTypeConfig = {
   bus: { icon: Bus, label: "Bus" },
   taxi: { icon: CarTaxiFront, label: "Taxi" },
@@ -49,7 +52,7 @@ export function LiveMap() {
     showCameras: true,
     congestionSeverity: ["critical", "warning", "info"],
   })
-  const [panelOpen, setPanelOpen] = useState(true)
+  const [panelOpen, setPanelOpen] = useState(false)
   const [selectedVehicle, setSelectedVehicle] =
     useState<SelectedVehicle | null>(null)
   const [selectedRoute, setSelectedRoute] = useState<SelectedRoute | null>(null)
@@ -89,8 +92,8 @@ export function LiveMap() {
   return (
     <div className="relative h-[calc(100dvh-3.5rem)] w-full">
       <Map
-        center={[23.7275, 37.9838]}
-        zoom={12}
+        center={DEFAULT_CENTER}
+        zoom={DEFAULT_ZOOM}
         minZoom={0}
         maxZoom={18}
         className="h-full w-full"
@@ -102,7 +105,6 @@ export function LiveMap() {
           showLocate
           showFullscreen
         />
-
         {filters.showHeatmap && <TrafficHeatmap data={activeHeatmap} />}
 
         {filters.showCongestion && (
@@ -160,6 +162,9 @@ export function LiveMap() {
         onOpenChange={setPanelOpen}
         filters={filters}
         onFiltersChange={setFilters}
+      />
+
+      <HistoricalPlaybackControl
         timeHour={timeHour}
         onTimeHourChange={setTimeHour}
         timePlaying={timePlaying}

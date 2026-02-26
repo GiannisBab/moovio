@@ -226,16 +226,14 @@ export function HistoricalPlaybackControl({
       {!expanded ? (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
-              <button
-                onClick={() => setExpanded(true)}
-                className={cn(
-                  "flex items-center justify-center size-9 rounded-lg border border-border bg-background/80 backdrop-blur-sm shadow-md transition-colors hover:bg-accent",
-                  isHistorical && "border-amber-500/30 bg-amber-500/10"
-                )}
-              >
-                <History className={cn("size-4", isHistorical && "text-amber-600 dark:text-amber-400")} />
-              </button>
+            <TooltipTrigger
+              onClick={() => setExpanded(true)}
+              className={cn(
+                "flex items-center justify-center size-9 rounded-lg border border-border bg-background/80 backdrop-blur-sm shadow-md transition-colors hover:bg-accent",
+                isHistorical && "border-amber-500/30 bg-amber-500/10"
+              )}
+            >
+              <History className={cn("size-4", isHistorical && "text-amber-600 dark:text-amber-400")} />
             </TooltipTrigger>
             <TooltipContent side="right">Historical Playback</TooltipContent>
           </Tooltip>
@@ -341,19 +339,15 @@ export function MapOverlayPanel({
       <Tooltip>
         <TooltipTrigger
           className={cn(
-            "absolute top-3 left-3 z-20",
+            "absolute top-3 left-3 z-20 flex items-center justify-center size-9 rounded-lg border border-border bg-background/80 backdrop-blur-sm shadow-md transition-colors hover:bg-accent",
             open && "hidden"
           )}
+          onClick={() => onOpenChange(true)}
         >
-          <button
-            onClick={() => onOpenChange(true)}
-            className="relative flex items-center justify-center size-9 rounded-lg border border-border bg-background/80 backdrop-blur-sm shadow-md transition-colors hover:bg-accent"
-          >
-            <Layers className="size-4" />
-            <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center size-4 rounded-full bg-foreground text-background text-[9px] font-semibold">
-              {activeLayerCount}
-            </span>
-          </button>
+          <Layers className="size-4" />
+          <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center size-4 rounded-full bg-foreground text-background text-[9px] font-semibold">
+            {activeLayerCount}
+          </span>
         </TooltipTrigger>
         <TooltipContent side="right">
           Map Layers & Filters

@@ -74,8 +74,17 @@ function FilterToggle({
   onChange: (checked: boolean) => void
 }) {
   return (
-    <label className="flex items-center justify-between cursor-pointer">
-      <span className="text-xs">{label}</span>
+    <label className="flex items-center justify-between cursor-pointer py-0.5">
+      <span
+        className={cn(
+          "text-[13px] tracking-[-0.01em] transition-colors duration-150",
+          checked
+            ? "font-medium text-foreground"
+            : "font-normal text-muted-foreground/70"
+        )}
+      >
+        {label}
+      </span>
       <Switch size="sm" checked={checked} onCheckedChange={onChange} />
     </label>
   )
@@ -95,9 +104,9 @@ function PanelContent({
   onFiltersChange: (filters: MapFilters) => void
 }) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {/* Layer toggles */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <FilterToggle
           label="Congestion Points"
           checked={filters.showCongestion}
@@ -151,20 +160,20 @@ function PanelContent({
 
       {/* Routes legend */}
       <div>
-        <p className="text-[10px] font-medium text-muted-foreground mb-1.5">
+        <p className="text-[11px] uppercase tracking-wider font-medium text-muted-foreground/50 mb-2">
           Routes
         </p>
-        <div className="flex gap-1.5">
+        <div className="flex gap-2">
           {legendItems.map((item) => (
             <div
               key={item.label}
-              className="flex flex-col items-center gap-0.5"
+              className="flex flex-col items-center gap-1"
             >
               <span
-                className="size-2.5 rounded-sm"
+                className="size-2.5 rounded-full"
                 style={{ backgroundColor: item.color }}
               />
-              <span className="text-[9px] text-muted-foreground">
+              <span className="text-[10px] font-normal text-muted-foreground/70">
                 {item.label}
               </span>
             </div>
@@ -229,37 +238,44 @@ export function HistoricalPlaybackControl({
             <TooltipTrigger
               onClick={() => setExpanded(true)}
               className={cn(
-                "flex items-center justify-center size-9 rounded-lg border border-border bg-background/80 backdrop-blur-sm shadow-md transition-colors hover:bg-accent",
+                "flex items-center justify-center size-9 rounded-xl border border-border bg-background/80 backdrop-blur-sm shadow-md transition-colors hover:bg-accent",
                 isHistorical && "border-amber-500/30 bg-amber-500/10"
               )}
             >
-              <History className={cn("size-4", isHistorical && "text-amber-600 dark:text-amber-400")} />
+              <History className={cn("size-4", isHistorical && "text-amber-600 dark:text-amber-400")} strokeWidth={1.5} />
             </TooltipTrigger>
             <TooltipContent side="right">Historical Playback</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       ) : (
-        <div className="rounded-lg border border-border bg-background/90 backdrop-blur-md shadow-lg p-2.5 w-56 space-y-2">
+        <div className="rounded-xl border border-border bg-background/90 backdrop-blur-md shadow-lg p-3 w-56 space-y-2.5">
           {/* Header row */}
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-medium text-muted-foreground">
+            <span
+              className={cn(
+                "text-[11px] tabular-nums tracking-[-0.01em] transition-colors duration-150",
+                isHistorical
+                  ? "font-medium text-foreground"
+                  : "font-normal text-muted-foreground/70"
+              )}
+            >
               {isHistorical ? formatHour(timeHour!) : "Live"}
             </span>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5">
               {isHistorical && (
                 <button
                   type="button"
                   onClick={handleToggleMode}
-                  className="text-[10px] font-medium text-green-600 dark:text-green-400 hover:underline"
+                  className="text-[11px] font-medium tracking-[-0.01em] text-green-600 dark:text-green-400 transition-colors hover:text-green-700 dark:hover:text-green-300"
                 >
                   Back to Live
                 </button>
               )}
               <button
                 onClick={() => setExpanded(false)}
-                className="flex items-center justify-center size-5 rounded transition-colors hover:bg-accent text-muted-foreground"
+                className="flex items-center justify-center size-5 rounded-md transition-colors hover:bg-accent text-muted-foreground/60"
               >
-                <X className="size-3" />
+                <X className="size-3" strokeWidth={1.5} />
               </button>
             </div>
           </div>
@@ -281,7 +297,7 @@ export function HistoricalPlaybackControl({
               <span
                 key={h}
                 className={cn(
-                  "text-[8px] text-muted-foreground/50 tabular-nums",
+                  "text-[9px] text-muted-foreground/40 tabular-nums tracking-tight",
                   isHistorical && timeHour === h && "text-foreground font-medium"
                 )}
               >
@@ -291,20 +307,20 @@ export function HistoricalPlaybackControl({
           </div>
 
           {/* Controls */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="icon-sm"
               onClick={handlePlayPause}
-              className="size-6 shrink-0"
+              className="size-6 shrink-0 rounded-md"
             >
               {timePlaying ? (
-                <Pause className="size-3" />
+                <Pause className="size-3" strokeWidth={1.5} />
               ) : (
-                <Play className="size-3" />
+                <Play className="size-3" strokeWidth={1.5} />
               )}
             </Button>
-            <span className="text-[10px] text-muted-foreground">
+            <span className="text-[11px] font-normal tracking-[-0.01em] text-muted-foreground">
               {isHistorical ? "Scrub through the day" : "Press play to start"}
             </span>
           </div>
@@ -345,7 +361,7 @@ export function MapOverlayPanel({
           onClick={() => onOpenChange(true)}
         >
           <Layers className="size-4" />
-          <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center size-4 rounded-full bg-foreground text-background text-[9px] font-semibold">
+          <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center size-4 rounded-full bg-foreground text-background text-[9px] font-medium tabular-nums">
             {activeLayerCount}
           </span>
         </TooltipTrigger>
@@ -364,8 +380,8 @@ export function MapOverlayPanel({
         <Drawer open={open} onOpenChange={onOpenChange}>
           <DrawerContent>
             <DrawerHeader>
-              <DrawerTitle className="flex items-center gap-2 text-sm">
-                <Layers className="size-4" />
+              <DrawerTitle className="flex items-center gap-2 text-[15px] font-medium tracking-[-0.01em]">
+                <Layers className="size-4 text-muted-foreground/60" strokeWidth={1.5} />
                 Map Layers
               </DrawerTitle>
             </DrawerHeader>
@@ -390,11 +406,11 @@ export function MapOverlayPanel({
             : "-translate-x-full opacity-0 pointer-events-none"
         )}
       >
-        <Card className="bg-background/90 backdrop-blur-md shadow-lg">
+        <Card className="bg-background/90 backdrop-blur-md shadow-lg py-0 gap-0">
           <CardHeader className="pb-2 pt-3 px-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2 text-xs">
-                <Layers className="size-3.5" />
+              <CardTitle className="flex items-center gap-2 text-[13px] font-medium tracking-[-0.01em]">
+                <Layers className="size-3.5" strokeWidth={1.5} />
                 Map Layers
               </CardTitle>
               <Button

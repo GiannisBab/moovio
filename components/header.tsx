@@ -17,8 +17,6 @@ import {
   ShieldAlert,
   CalendarClock,
 } from "lucide-react"
-import { SidebarTrigger } from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Kbd } from "@/components/ui/kbd"
@@ -147,9 +145,6 @@ export function Header() {
 
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b px-4">
-      <SidebarTrigger />
-      <Separator orientation="vertical" className="self-center! h-4" />
-
       {/* Breadcrumbs */}
       <Breadcrumb>
         <BreadcrumbList>

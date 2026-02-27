@@ -22,6 +22,7 @@ import {
   SidebarMenuButton,
   SidebarFooter,
   SidebarRail,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { buttonVariants } from "@/components/ui/button"
@@ -38,11 +39,14 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarHeader>
-        <Link href="/" className="flex items-center px-2 py-1">
-          <Logo className="h-7 w-auto" />
-        </Link>
+        <div className="flex items-center justify-between px-2 py-1 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
+          <Link href="/" className="flex items-center group-data-[collapsible=icon]:hidden">
+            <Logo className="h-7 w-auto" />
+          </Link>
+          <SidebarTrigger />
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

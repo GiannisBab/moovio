@@ -1896,7 +1896,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 38.0030,
     name: "I/C D. Plakentias",
     direction: "Athens Airport / Elefsina",
-    streamUrl: "https://s76.ipcamlive.com/streams/4czoyjsf4xvy7qsla/stream.m3u8",
+    streamUrl: "https://s76.ipcamlive.com/streams/4ckeqpcl2njaszath/stream.m3u8",
   },
   {
     id: "cam-2",
@@ -1928,7 +1928,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 37.9010,
     name: "Koropi Toll Station",
     direction: "Athens Airport / Elefsina",
-    streamUrl: "https://s44.ipcamlive.com/streams/2cl8l71wa4t65qmhs/stream.m3u8",
+    streamUrl: "https://s29.ipcamlive.com/streams/1d4a2ovcl1zfj0rdq/stream.m3u8",
   },
   {
     id: "cam-6",
@@ -1936,7 +1936,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 38.0320,
     name: "Roupaki Toll Station",
     direction: "Elefsina / Athens Airport",
-    streamUrl: "https://s29.ipcamlive.com/streams/1dxmv8hiclq7pnrhg/stream.m3u8",
+    streamUrl: "https://s29.ipcamlive.com/streams/1dnuilr71uxvxmgzp/stream.m3u8",
   },
 ]
 

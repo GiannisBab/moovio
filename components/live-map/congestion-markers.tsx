@@ -1,21 +1,22 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Alert01Icon, AlertCircleIcon, Clock01Icon, DashboardSpeedIcon, InformationCircleIcon } from "@hugeicons/core-free-icons";
 import { MapMarker, MarkerContent, MarkerPopup } from "@/components/ui/map"
 import { Badge } from "@/components/ui/badge"
-import { AlertTriangle, AlertCircle, Info, Clock, Gauge } from "lucide-react"
 import type { CongestionPoint } from "@/lib/data/live-map-data"
 import { cn } from "@/lib/utils"
 
 const severityConfig = {
   critical: {
-    icon: AlertTriangle,
+    icon: Alert01Icon,
     color: "bg-red-500",
     pulseColor: "bg-red-400",
     badge: "destructive" as const,
     label: "Critical",
   },
   warning: {
-    icon: AlertCircle,
+    icon: AlertCircleIcon,
     color: "bg-amber-500",
     pulseColor: "bg-amber-400",
     badge: "outline" as const,
@@ -23,7 +24,7 @@ const severityConfig = {
     badgeClass: "border-amber-500 text-amber-600 dark:text-amber-400",
   },
   info: {
-    icon: Info,
+    icon: InformationCircleIcon,
     color: "bg-blue-500",
     pulseColor: "bg-blue-400",
     badge: "secondary" as const,
@@ -36,7 +37,6 @@ export function CongestionMarkers({ points }: { points: CongestionPoint[] }) {
     <>
       {points.map((point) => {
         const config = severityConfig[point.severity]
-        const Icon = config.icon
         return (
           <MapMarker
             key={point.id}
@@ -59,7 +59,7 @@ export function CongestionMarkers({ points }: { points: CongestionPoint[] }) {
                     config.color
                   )}
                 >
-                  <Icon className="size-4 text-white" />
+                  <HugeiconsIcon icon={config.icon} className="size-4 text-white" />
                 </div>
               </div>
             </MarkerContent>
@@ -81,11 +81,11 @@ export function CongestionMarkers({ points }: { points: CongestionPoint[] }) {
                 </p>
                 <div className="flex gap-3 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1">
-                    <Gauge className="size-3" />
+                    <HugeiconsIcon icon={DashboardSpeedIcon} className="size-3" />
                     {point.avgSpeed} km/h
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock className="size-3" />
+                    <HugeiconsIcon icon={Clock01Icon} className="size-3" />
                     +{point.delayMinutes} min
                   </span>
                 </div>

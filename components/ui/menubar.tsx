@@ -1,5 +1,7 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Tick01Icon } from "@hugeicons/core-free-icons";
 import * as React from "react"
 import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 import { Menubar as MenubarPrimitive } from "@base-ui/react/menubar"
@@ -20,7 +22,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { CheckIcon } from "lucide-react"
 
 function Menubar({ className, ...props }: MenubarPrimitive.Props) {
   return (
@@ -122,8 +123,7 @@ function MenubarCheckboxItem({
     >
       <span className="left-2 size-4 [&_svg:not([class*='size-'])]:size-4 pointer-events-none absolute flex items-center justify-center">
         <MenuPrimitive.CheckboxItemIndicator>
-          <CheckIcon
-          />
+          <HugeiconsIcon icon={Tick01Icon} />
         </MenuPrimitive.CheckboxItemIndicator>
       </span>
       {children}
@@ -157,8 +157,7 @@ function MenubarRadioItem({
     >
       <span className="left-2 size-4 [&_svg:not([class*='size-'])]:size-4 pointer-events-none absolute flex items-center justify-center">
         <MenuPrimitive.RadioItemIndicator>
-          <CheckIcon
-          />
+          <HugeiconsIcon icon={Tick01Icon} />
         </MenuPrimitive.RadioItemIndicator>
       </span>
       {children}

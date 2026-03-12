@@ -1,6 +1,6 @@
 "use client"
-
-import { AlertTriangle } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Alert01Icon } from "@hugeicons/core-free-icons";
 import type { CongestionAlert } from "@/lib/data/dashboard-data"
 
 function getGreeting(): string {
@@ -20,7 +20,7 @@ export function WelcomeSection({ alerts }: { alerts: CongestionAlert[] }) {
       <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
         {criticalCount > 0 && (
           <>
-            <AlertTriangle className="size-3.5 text-red-600 dark:text-red-400" />
+            <HugeiconsIcon icon={Alert01Icon} className="size-3.5 text-red-600 dark:text-red-400" />
             <span>
               {criticalCount} critical alert{criticalCount !== 1 ? "s" : ""} need
               {criticalCount === 1 ? "s" : ""} attention

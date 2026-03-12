@@ -1,14 +1,9 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { AiBrain01Icon, BarChartIcon, DashboardCircleIcon, GithubIcon, MapsIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  LayoutDashboard,
-  Map,
-  BarChart3,
-  BrainCircuit,
-  Github,
-} from "lucide-react"
 import { Logo } from "@/components/logo"
 import {
   Sidebar,
@@ -29,10 +24,10 @@ import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { title: "Dashboard", href: "/", icon: LayoutDashboard },
-  { title: "Live Map", href: "/live-map", icon: Map },
-  { title: "Analytics", href: "/analytics", icon: BarChart3 },
-  { title: "Predictions", href: "/predictions", icon: BrainCircuit },
+  { title: "Dashboard", href: "/", icon: DashboardCircleIcon },
+  { title: "Live Map", href: "/live-map", icon: MapsIcon },
+  { title: "Analytics", href: "/analytics", icon: BarChartIcon },
+  { title: "Predictions", href: "/predictions", icon: AiBrain01Icon },
 ]
 
 export function AppSidebar() {
@@ -71,15 +66,12 @@ export function AppSidebar() {
                           "bg-sidebar-accent/80 font-medium text-sidebar-accent-foreground"
                       )}
                     >
-                      <item.icon
-                        className={cn(
-                          "size-[18px] shrink-0",
-                          active
-                            ? "text-sidebar-accent-foreground"
-                            : "text-sidebar-foreground/50"
-                        )}
-                        strokeWidth={active ? 2 : 1.5}
-                      />
+                      <HugeiconsIcon icon={item.icon} className={cn(
+                                                      "size-[18px] shrink-0",
+                                                      active
+                                                        ? "text-sidebar-accent-foreground"
+                                                        : "text-sidebar-foreground/50"
+                                                    )} strokeWidth={active ? 2 : 1.5} />
                       <span>{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -98,7 +90,7 @@ export function AppSidebar() {
             aria-label="GitHub"
             className={buttonVariants({ variant: "ghost", size: "icon-sm" })}
           >
-            <Github className="size-4" />
+            <HugeiconsIcon icon={GithubIcon} className="size-4" />
           </a>
           <ThemeToggle />
         </div>

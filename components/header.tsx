@@ -1,22 +1,10 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { AiBrain01Icon, Alert01Icon, BarChartIcon, Calendar01Icon, Car01Icon, ConstructionIcon, DashboardCircleIcon, MapsIcon, Notification01Icon, OctagonIcon, Search01Icon, Shield01Icon } from "@hugeicons/core-free-icons";
 import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import {
-  AlertTriangle,
-  Bell,
-  BrainCircuit,
-  Car,
-  Construction,
-  BarChart3,
-  LayoutDashboard,
-  Map,
-  OctagonX,
-  Search,
-  ShieldAlert,
-  CalendarClock,
-} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Kbd } from "@/components/ui/kbd"
@@ -54,17 +42,17 @@ const pageTitles: Record<string, string> = {
 }
 
 const pages = [
-  { title: "Dashboard", href: "/", icon: LayoutDashboard },
-  { title: "Live Map", href: "/live-map", icon: Map },
-  { title: "Analytics & Reports", href: "/analytics", icon: BarChart3 },
-  { title: "AI Predictions", href: "/predictions", icon: BrainCircuit },
+  { title: "Dashboard", href: "/", icon: DashboardCircleIcon },
+  { title: "Live Map", href: "/live-map", icon: MapsIcon },
+  { title: "Analytics & Reports", href: "/analytics", icon: BarChartIcon },
+  { title: "AI Predictions", href: "/predictions", icon: AiBrain01Icon },
 ]
 
-const incidentIcons: Record<string, typeof Car> = {
-  accident: Car,
-  roadwork: Construction,
-  closure: OctagonX,
-  event: CalendarClock,
+const incidentIcons: Record<string, typeof Car01Icon> = {
+  accident: Car01Icon,
+  roadwork: ConstructionIcon,
+  closure: OctagonIcon,
+  event: Calendar01Icon,
 }
 
 const severityVariant: Record<string, "destructive" | "outline" | "secondary"> = {
@@ -80,7 +68,7 @@ const allNotifications = [
     description: inc.location,
     severity: inc.severity,
     time: inc.reportedAt,
-    icon: incidentIcons[inc.type] ?? ShieldAlert,
+    icon: incidentIcons[inc.type] ?? Shield01Icon,
     href: "/live-map",
   })),
   ...congestionAlerts.map((alert) => ({
@@ -89,7 +77,7 @@ const allNotifications = [
     description: alert.description,
     severity: alert.severity,
     time: alert.time,
-    icon: AlertTriangle,
+    icon: Alert01Icon,
     href: "/",
   })),
 ].sort((a, b) => {
@@ -174,7 +162,7 @@ export function Header() {
           onClick={() => setSearchOpen(true)}
           className="border-input bg-muted/40 text-muted-foreground hover:bg-muted flex h-8 w-8 items-center justify-center gap-2 rounded-md border text-sm transition-colors md:w-56 md:justify-start md:px-3"
         >
-          <Search className="size-3.5 shrink-0" />
+          <HugeiconsIcon icon={Search01Icon} className="size-3.5 shrink-0" />
           <span className="hidden flex-1 text-left md:inline">Search...</span>
           <Kbd className="hidden md:inline">⌘K</Kbd>
         </button>
@@ -195,7 +183,7 @@ export function Header() {
                     key={page.href}
                     onSelect={() => handleSelect(page.href)}
                   >
-                    <page.icon className="size-4" />
+                    <HugeiconsIcon icon={page.icon} className="size-4" />
                     {page.title}
                   </CommandItem>
                 ))}
@@ -206,7 +194,7 @@ export function Header() {
                     key={alert.id}
                     onSelect={() => handleSelect("/")}
                   >
-                    <AlertTriangle className="size-4" />
+                    <HugeiconsIcon icon={Alert01Icon} className="size-4" />
                     <div className="flex flex-col">
                       <span>{alert.location}</span>
                       <span className="text-muted-foreground text-xs">
@@ -224,13 +212,13 @@ export function Header() {
               </CommandGroup>
               <CommandGroup heading="Incidents">
                 {incidents.map((inc) => {
-                  const Icon = incidentIcons[inc.type] ?? ShieldAlert
+                  const icon = incidentIcons[inc.type] ?? Shield01Icon
                   return (
                     <CommandItem
                       key={inc.id}
                       onSelect={() => handleSelect("/live-map")}
                     >
-                      <Icon className="size-4" />
+                      <HugeiconsIcon icon={icon} className="size-4" />
                       <div className="flex flex-col">
                         <span>{inc.title}</span>
                         <span className="text-muted-foreground text-xs">
@@ -262,7 +250,7 @@ export function Header() {
               />
             }
           >
-            <Bell className="size-4" />
+            <HugeiconsIcon icon={Notification01Icon} className="size-4" />
             {unreadCount > 0 && (
               <span className="absolute right-1.5 top-1.5 size-2 rounded-full bg-destructive" />
             )}
@@ -292,7 +280,7 @@ export function Header() {
             <div className="max-h-80 overflow-y-auto">
               {visibleNotifications.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
-                  <Bell className="mb-2 size-8 opacity-30" />
+                  <HugeiconsIcon icon={Notification01Icon} className="mb-2 size-8 opacity-30" />
                   <p className="text-sm">No notifications</p>
                 </div>
               ) : (
@@ -308,7 +296,7 @@ export function Header() {
                       readIds.has(n.id) && "opacity-60"
                     )}
                   >
-                    <n.icon className="text-muted-foreground mt-0.5 size-4 shrink-0" />
+                    <HugeiconsIcon icon={n.icon} className="text-muted-foreground mt-0.5 size-4 shrink-0" />
                     <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                       <div className="flex items-center justify-between gap-2">
                         <span className="truncate text-sm font-medium">

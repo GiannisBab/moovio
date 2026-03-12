@@ -1,5 +1,7 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Bus01Icon, Car01Icon, DashboardSpeedIcon, RadioIcon, Route01Icon, TaxiIcon } from "@hugeicons/core-free-icons";
 import { useState, useCallback, useMemo } from "react"
 import { Map, MapControls, MapPopup } from "@/components/ui/map"
 import { CongestionMarkers } from "./congestion-markers"
@@ -21,24 +23,16 @@ import {
   generateHistoricalSnapshot,
   type TrafficRoute,
 } from "@/lib/data/live-map-data"
-import {
-  Bus,
-  Car,
-  CarTaxiFront,
-  Gauge,
-  Radio,
-  Route,
-} from "lucide-react"
 import { congestionLevelColors } from "@/lib/data/live-map-data"
 
 const DEFAULT_CENTER: [number, number] = [23.7275, 37.9838]
 const DEFAULT_ZOOM = 12
 
 const vehicleTypeConfig = {
-  bus: { icon: Bus, label: "Bus" },
-  taxi: { icon: CarTaxiFront, label: "Taxi" },
-  car: { icon: Car, label: "Car" },
-  sensor: { icon: Radio, label: "Sensor" },
+  bus: { icon: Bus01Icon, label: "Bus" },
+  taxi: { icon: TaxiIcon, label: "Taxi" },
+  car: { icon: Car01Icon, label: "Car" },
+  sensor: { icon: RadioIcon, label: "Sensor" },
 }
 
 export function LiveMap() {
@@ -192,7 +186,7 @@ function RoutePopupContent({ route }: { route: TrafficRoute }) {
           className="flex items-center justify-center size-7 rounded-full"
           style={{ backgroundColor: `${color}15` }}
         >
-          <Route className="size-4" style={{ color }} />
+          <HugeiconsIcon icon={Route01Icon} className="size-4" style={{ color }} />
         </div>
         <div>
           <p className="text-sm font-semibold">{route.name}</p>
@@ -202,7 +196,7 @@ function RoutePopupContent({ route }: { route: TrafficRoute }) {
         </div>
       </div>
       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        <Gauge className="size-3" />
+        <HugeiconsIcon icon={DashboardSpeedIcon} className="size-3" />
         {route.avgSpeed} km/h avg
       </div>
     </div>
@@ -211,13 +205,12 @@ function RoutePopupContent({ route }: { route: TrafficRoute }) {
 
 function VehiclePopupContent({ vehicle }: { vehicle: SelectedVehicle }) {
   const config = vehicleTypeConfig[vehicle.properties.type]
-  const Icon = config.icon
 
   return (
     <div className="w-48 space-y-2">
       <div className="flex items-center gap-2">
         <div className="flex items-center justify-center size-7 rounded-full bg-blue-500/10">
-          <Icon className="size-4 text-blue-500" />
+          <HugeiconsIcon icon={config.icon} className="size-4 text-blue-500" />
         </div>
         <div>
           <p className="text-sm font-semibold">{config.label}</p>
@@ -227,7 +220,7 @@ function VehiclePopupContent({ vehicle }: { vehicle: SelectedVehicle }) {
         </div>
       </div>
       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        <Gauge className="size-3" />
+        <HugeiconsIcon icon={DashboardSpeedIcon} className="size-3" />
         {vehicle.properties.speed} km/h
       </div>
     </div>

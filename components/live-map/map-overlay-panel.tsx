@@ -1,5 +1,7 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Cancel01Icon, Layers01Icon, PauseIcon, PlayIcon, WorkHistoryIcon } from "@hugeicons/core-free-icons";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import {
   Card,
@@ -22,13 +24,6 @@ import {
   TooltipContent,
   TooltipProvider,
 } from "@/components/ui/tooltip"
-import {
-  X,
-  Layers,
-  Play,
-  Pause,
-  History,
-} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useIsMobile } from "@/hooks/use-mobile"
 
@@ -242,7 +237,7 @@ export function HistoricalPlaybackControl({
                 isHistorical && "border-amber-500/30 bg-amber-500/10"
               )}
             >
-              <History className={cn("size-4", isHistorical && "text-amber-600 dark:text-amber-400")} strokeWidth={1.5} />
+              <HugeiconsIcon icon={WorkHistoryIcon} className={cn("size-4", isHistorical && "text-amber-600 dark:text-amber-400")} strokeWidth={1.5} />
             </TooltipTrigger>
             <TooltipContent side="right">Historical Playback</TooltipContent>
           </Tooltip>
@@ -275,7 +270,7 @@ export function HistoricalPlaybackControl({
                 onClick={() => setExpanded(false)}
                 className="flex items-center justify-center size-5 rounded-md transition-colors hover:bg-accent text-muted-foreground/60"
               >
-                <X className="size-3" strokeWidth={1.5} />
+                <HugeiconsIcon icon={Cancel01Icon} className="size-3" strokeWidth={1.5} />
               </button>
             </div>
           </div>
@@ -315,9 +310,9 @@ export function HistoricalPlaybackControl({
               className="size-6 shrink-0 rounded-md"
             >
               {timePlaying ? (
-                <Pause className="size-3" strokeWidth={1.5} />
+                <HugeiconsIcon icon={PauseIcon} className="size-3" strokeWidth={1.5} />
               ) : (
-                <Play className="size-3" strokeWidth={1.5} />
+                <HugeiconsIcon icon={PlayIcon} className="size-3" strokeWidth={1.5} />
               )}
             </Button>
             <span className="text-[11px] font-normal tracking-[-0.01em] text-muted-foreground">
@@ -360,7 +355,7 @@ export function MapOverlayPanel({
           )}
           onClick={() => onOpenChange(true)}
         >
-          <Layers className="size-4" />
+          <HugeiconsIcon icon={Layers01Icon} className="size-4" />
           <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center size-4 rounded-full bg-foreground text-background text-[9px] font-medium tabular-nums">
             {activeLayerCount}
           </span>
@@ -381,7 +376,7 @@ export function MapOverlayPanel({
           <DrawerContent>
             <DrawerHeader>
               <DrawerTitle className="flex items-center gap-2 text-[15px] font-medium tracking-[-0.01em]">
-                <Layers className="size-4 text-muted-foreground/60" strokeWidth={1.5} />
+                <HugeiconsIcon icon={Layers01Icon} className="size-4 text-muted-foreground/60" strokeWidth={1.5} />
                 Map Layers
               </DrawerTitle>
             </DrawerHeader>
@@ -410,7 +405,7 @@ export function MapOverlayPanel({
           <CardHeader className="pb-2 pt-3 px-3">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-[13px] font-medium tracking-[-0.01em]">
-                <Layers className="size-3.5" strokeWidth={1.5} />
+                <HugeiconsIcon icon={Layers01Icon} className="size-3.5" strokeWidth={1.5} />
                 Map Layers
               </CardTitle>
               <Button
@@ -418,7 +413,7 @@ export function MapOverlayPanel({
                 size="icon-sm"
                 onClick={() => onOpenChange(false)}
               >
-                <X className="size-3.5" />
+                <HugeiconsIcon icon={Cancel01Icon} className="size-3.5" />
               </Button>
             </div>
           </CardHeader>

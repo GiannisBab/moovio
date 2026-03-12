@@ -1,25 +1,20 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Bus01Icon, Train02Icon, TramIcon, UniversalAccessIcon, ZapIcon } from "@hugeicons/core-free-icons";
 import {
   MapMarker,
   MarkerContent,
   MarkerPopup,
 } from "@/components/ui/map"
 import { Badge } from "@/components/ui/badge"
-import {
-  TrainFront,
-  Bus,
-  TramFront,
-  Zap,
-  Accessibility,
-} from "lucide-react"
 import type { TransitStop, TransitStopType } from "@/lib/data/live-map-data"
 import { cn } from "@/lib/utils"
 
 const stopTypeConfig: Record<
   TransitStopType,
   {
-    icon: typeof Bus
+    icon: typeof Bus01Icon
     label: string
     color: string
     bgColor: string
@@ -27,28 +22,28 @@ const stopTypeConfig: Record<
   }
 > = {
   metro: {
-    icon: TrainFront,
+    icon: Train02Icon,
     label: "Metro",
     color: "text-blue-600 dark:text-blue-400",
     bgColor: "bg-blue-500/10",
     markerBg: "bg-blue-600",
   },
   bus: {
-    icon: Bus,
+    icon: Bus01Icon,
     label: "Bus Stop",
     color: "text-emerald-600 dark:text-emerald-400",
     bgColor: "bg-emerald-500/10",
     markerBg: "bg-emerald-600",
   },
   tram: {
-    icon: TramFront,
+    icon: TramIcon,
     label: "Tram",
     color: "text-cyan-600 dark:text-cyan-400",
     bgColor: "bg-cyan-500/10",
     markerBg: "bg-cyan-600",
   },
   trolleybus: {
-    icon: Zap,
+    icon: ZapIcon,
     label: "Trolleybus",
     color: "text-amber-600 dark:text-amber-400",
     bgColor: "bg-amber-500/10",
@@ -61,7 +56,6 @@ export function TransitStopMarkers({ stops }: { stops: TransitStop[] }) {
     <>
       {stops.map((stop) => {
         const config = stopTypeConfig[stop.type]
-        const Icon = config.icon
 
         return (
           <MapMarker
@@ -76,7 +70,7 @@ export function TransitStopMarkers({ stops }: { stops: TransitStop[] }) {
                   config.markerBg
                 )}
               >
-                <Icon className="size-3.5 text-white" />
+                <HugeiconsIcon icon={config.icon} className="size-3.5 text-white" />
               </div>
             </MarkerContent>
             <MarkerPopup closeButton>
@@ -89,7 +83,7 @@ export function TransitStopMarkers({ stops }: { stops: TransitStop[] }) {
                         config.bgColor
                       )}
                     >
-                      <Icon className={cn("size-4", config.color)} />
+                      <HugeiconsIcon icon={config.icon} className={cn("size-4", config.color)} />
                     </div>
                     <div>
                       <p className="text-sm font-semibold">{stop.name}</p>
@@ -108,7 +102,7 @@ export function TransitStopMarkers({ stops }: { stops: TransitStop[] }) {
                 </div>
                 {stop.accessible && (
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Accessibility className="size-3" />
+                    <HugeiconsIcon icon={UniversalAccessIcon} className="size-3" />
                     Wheelchair accessible
                   </div>
                 )}

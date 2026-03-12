@@ -1,8 +1,9 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { MoonIcon, Sun01Icon } from "@hugeicons/core-free-icons";
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Sun, Moon } from "lucide-react"
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
@@ -13,8 +14,8 @@ export function ThemeToggle() {
       size="icon-sm"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      <Sun className="size-4 dark:hidden" />
-      <Moon className="hidden size-4 dark:block" />
+      <HugeiconsIcon icon={Sun01Icon} className="size-4 dark:hidden" />
+      <HugeiconsIcon icon={MoonIcon} className="hidden size-4 dark:block" />
       <span className="sr-only">Toggle theme</span>
     </Button>
   )

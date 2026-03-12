@@ -1,3 +1,5 @@
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Alert01Icon, AlertCircleIcon, ArrowRight01Icon, Clock01Icon, InformationCircleIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link"
 import {
   Card,
@@ -9,25 +11,24 @@ import {
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { AlertTriangle, AlertCircle, Info, Clock, ArrowRight } from "lucide-react"
 import type { CongestionAlert } from "@/lib/data/dashboard-data"
 import { cn } from "@/lib/utils"
 
 const severityConfig = {
   critical: {
-    icon: AlertTriangle,
+    icon: Alert01Icon,
     badge: "destructive" as const,
     label: "Critical",
     iconClass: "text-red-600 dark:text-red-400",
   },
   warning: {
-    icon: AlertCircle,
+    icon: AlertCircleIcon,
     badge: "outline" as const,
     label: "Warning",
     iconClass: "text-amber-600 dark:text-amber-400",
   },
   info: {
-    icon: Info,
+    icon: InformationCircleIcon,
     badge: "secondary" as const,
     label: "Info",
     iconClass: "text-blue-600 dark:text-blue-400",
@@ -54,7 +55,7 @@ export function CongestionAlerts({
             className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             View all
-            <ArrowRight className="size-3" />
+            <HugeiconsIcon icon={ArrowRight01Icon} className="size-3" />
           </Link>
         </CardAction>
       </CardHeader>
@@ -62,12 +63,12 @@ export function CongestionAlerts({
         <div className="space-y-0">
           {data.map((alert, index) => {
             const config = severityConfig[alert.severity]
-            const SeverityIcon = config.icon
             return (
               <div key={alert.id}>
                 {index > 0 && <Separator className="my-3" />}
                 <div className="flex items-start gap-3">
-                  <SeverityIcon
+                  <HugeiconsIcon
+                    icon={config.icon}
                     className={cn("mt-0.5 size-4 shrink-0", config.iconClass)}
                   />
                   <div className="flex-1 space-y-1">
@@ -90,7 +91,7 @@ export function CongestionAlerts({
                       {alert.description}
                     </p>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <Clock className="size-3" />
+                      <HugeiconsIcon icon={Clock01Icon} className="size-3" />
                       {alert.time}
                     </div>
                   </div>

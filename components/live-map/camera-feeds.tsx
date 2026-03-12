@@ -1,9 +1,10 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowUpRight01Icon, Video01Icon } from "@hugeicons/core-free-icons";
 import { useRef, useEffect, useState } from "react"
 import { MapMarker, MarkerContent, MarkerPopup } from "@/components/ui/map"
 import type { TrafficCamera } from "@/lib/data/live-map-data"
-import { Video, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Hls from "hls.js"
 
@@ -120,12 +121,12 @@ function CameraPopupContent({ camera }: { camera: TrafficCamera }) {
     <div ref={containerRef} className="w-72 space-y-2 pr-5">
       <div className="flex items-center gap-2">
         <div className="flex items-center justify-center size-7 rounded-full bg-sky-500/10">
-          <Video className="size-4 text-sky-500" />
+          <HugeiconsIcon icon={Video01Icon} className="size-4 text-sky-500" />
         </div>
         <div>
           <p className="text-sm font-semibold">{camera.name}</p>
           <p className="text-[10px] text-muted-foreground flex items-center gap-1">
-            <ArrowUpRight className="size-3" />
+            <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-3" />
             {camera.direction}
           </p>
         </div>
@@ -135,7 +136,7 @@ function CameraPopupContent({ camera }: { camera: TrafficCamera }) {
           <HlsPlayer key={playerKey} url={camera.streamUrl} />
         ) : (
           <div className="flex items-center justify-center h-full text-xs text-muted-foreground">
-            <Video className="size-4 opacity-50" />
+            <HugeiconsIcon icon={Video01Icon} className="size-4 opacity-50" />
           </div>
         )}
       </div>
@@ -158,7 +159,7 @@ function CameraMarker({ camera }: { camera: TrafficCamera }) {
               "bg-sky-600"
             )}
           >
-            <Video className="size-4 text-white" />
+            <HugeiconsIcon icon={Video01Icon} className="size-4 text-white" />
           </div>
         </div>
       </MarkerContent>

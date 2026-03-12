@@ -1,47 +1,41 @@
 "use client"
 
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Calendar01Icon, CancelCircleIcon, Car02Icon, Clock01Icon, ConstructionIcon, Layers01Icon } from "@hugeicons/core-free-icons";
 import { MapMarker, MarkerContent, MarkerPopup } from "@/components/ui/map"
 import { Badge } from "@/components/ui/badge"
-import {
-  CarFront,
-  Construction,
-  Ban,
-  Calendar,
-  Clock,
-  Layers,
-} from "lucide-react"
 import type { Incident, IncidentType } from "@/lib/data/live-map-data"
 import { cn } from "@/lib/utils"
 
 const incidentTypeConfig: Record<
   IncidentType,
   {
-    icon: typeof CarFront
+    icon: typeof Car02Icon
     label: string
     color: string
     markerBg: string
   }
 > = {
   accident: {
-    icon: CarFront,
+    icon: Car02Icon,
     label: "Accident",
     color: "text-red-600 dark:text-red-400",
     markerBg: "bg-red-600",
   },
   roadwork: {
-    icon: Construction,
+    icon: ConstructionIcon,
     label: "Roadwork",
     color: "text-orange-600 dark:text-orange-400",
     markerBg: "bg-orange-500",
   },
   closure: {
-    icon: Ban,
+    icon: CancelCircleIcon,
     label: "Closure",
     color: "text-rose-600 dark:text-rose-400",
     markerBg: "bg-rose-600",
   },
   event: {
-    icon: Calendar,
+    icon: Calendar01Icon,
     label: "Event",
     color: "text-violet-600 dark:text-violet-400",
     markerBg: "bg-violet-500",
@@ -62,7 +56,6 @@ export function IncidentMarkers({ incidents }: { incidents: Incident[] }) {
     <>
       {incidents.map((incident) => {
         const config = incidentTypeConfig[incident.type]
-        const Icon = config.icon
         const badge = severityBadge[incident.severity]
 
         return (
@@ -87,7 +80,7 @@ export function IncidentMarkers({ incidents }: { incidents: Incident[] }) {
                     config.markerBg
                   )}
                 >
-                  <Icon className="size-4 text-white" />
+                  <HugeiconsIcon icon={config.icon} className="size-4 text-white" />
                 </div>
               </div>
             </MarkerContent>
@@ -95,7 +88,7 @@ export function IncidentMarkers({ incidents }: { incidents: Incident[] }) {
               <div className="w-64 space-y-2 pr-5">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
-                    <Icon className={cn("size-3.5", config.color)} />
+                    <HugeiconsIcon icon={config.icon} className={cn("size-3.5", config.color)} />
                     <span className="font-semibold text-sm">
                       {incident.title}
                     </span>
@@ -112,18 +105,18 @@ export function IncidentMarkers({ incidents }: { incidents: Incident[] }) {
                 </p>
                 <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1">
-                    <Clock className="size-3" />
+                    <HugeiconsIcon icon={Clock01Icon} className="size-3" />
                     {incident.reportedAt}
                   </span>
                   {incident.estimatedClearance && (
                     <span className="flex items-center gap-1">
-                      <Clock className="size-3" />
+                      <HugeiconsIcon icon={Clock01Icon} className="size-3" />
                       ETA: {incident.estimatedClearance}
                     </span>
                   )}
                   {incident.lanesAffected && (
                     <span className="flex items-center gap-1">
-                      <Layers className="size-3" />
+                      <HugeiconsIcon icon={Layers01Icon} className="size-3" />
                       {incident.lanesAffected} lane{incident.lanesAffected > 1 ? "s" : ""} affected
                     </span>
                   )}

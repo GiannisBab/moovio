@@ -61,17 +61,17 @@ export function AppSidebar() {
                       render={<Link href={item.href} />}
                       isActive={active}
                       className={cn(
-                        "h-9 gap-3 rounded-lg px-3 font-normal tracking-[-0.01em] text-sidebar-foreground/70 transition-all duration-150",
+                        "h-9 gap-3 rounded-lg px-3 font-normal tracking-[-0.01em] text-sidebar-foreground/70 transition-[background-color,color] duration-150 ease-out-quart",
                         active &&
                           "bg-sidebar-accent/80 font-medium text-sidebar-accent-foreground"
                       )}
                     >
                       <HugeiconsIcon icon={item.icon} className={cn(
-                                                      "size-[18px] shrink-0",
+                                                      "size-[18px] shrink-0 transition-colors duration-150 ease-out-quart",
                                                       active
                                                         ? "text-sidebar-accent-foreground"
                                                         : "text-sidebar-foreground/50"
-                                                    )} strokeWidth={active ? 2 : 1.5} />
+                                                    )} strokeWidth={1.75} />
                       <span>{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

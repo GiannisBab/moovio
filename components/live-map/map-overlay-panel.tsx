@@ -349,9 +349,13 @@ export function MapOverlayPanel({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger
+          aria-hidden={open}
+          tabIndex={open ? -1 : 0}
           className={cn(
-            "absolute top-3 left-3 z-20 flex items-center justify-center size-9 rounded-lg border border-border bg-background/80 backdrop-blur-sm shadow-md transition-colors hover:bg-accent",
-            open && "hidden"
+            "absolute top-3 left-3 z-20 flex items-center justify-center size-9 rounded-lg border border-border bg-background/80 backdrop-blur-sm shadow-md transition-[opacity,background-color,transform] ease-out-quart hover:bg-accent",
+            open
+              ? "opacity-0 scale-95 pointer-events-none duration-120"
+              : "opacity-100 scale-100 duration-160"
           )}
           onClick={() => onOpenChange(true)}
         >
@@ -395,10 +399,10 @@ export function MapOverlayPanel({
 
       <div
         className={cn(
-          "absolute top-3 left-3 z-20 w-64 transition-all duration-300",
+          "absolute top-3 left-3 z-20 w-64 origin-top-left ease-out-quart will-change-[opacity,transform]",
           open
-            ? "translate-x-0 opacity-100"
-            : "-translate-x-full opacity-0 pointer-events-none"
+            ? "visible scale-100 opacity-100 transition-[transform,opacity,visibility] duration-160"
+            : "invisible scale-[0.97] opacity-0 pointer-events-none transition-opacity duration-160"
         )}
       >
         <Card className="bg-background/90 backdrop-blur-md shadow-lg py-0 gap-0">

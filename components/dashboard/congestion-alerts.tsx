@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react"
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Alert01Icon, AlertCircleIcon, ArrowRight01Icon, Clock01Icon, InformationCircleIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link"
@@ -64,7 +65,11 @@ export function CongestionAlerts({
           {data.map((alert, index) => {
             const config = severityConfig[alert.severity]
             return (
-              <div key={alert.id}>
+              <div
+                key={alert.id}
+                className="stagger-item"
+                style={{ "--stagger-index": index } as CSSProperties}
+              >
                 {index > 0 && <Separator className="my-3" />}
                 <div className="flex items-start gap-3">
                   <HugeiconsIcon

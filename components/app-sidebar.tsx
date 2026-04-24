@@ -1,7 +1,7 @@
 "use client"
 
 import { HugeiconsIcon } from "@hugeicons/react";
-import { AiBrain01Icon, BarChartIcon, DashboardCircleIcon, GithubIcon, MapsIcon } from "@hugeicons/core-free-icons";
+import { AiBrain01Icon, BarChartIcon, DashboardCircleIcon, File02Icon, GithubIcon, MapsIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Logo } from "@/components/logo"
@@ -21,12 +21,14 @@ import {
 } from "@/components/ui/sidebar"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { buttonVariants } from "@/components/ui/button"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 const navItems = [
   { title: "Dashboard", href: "/", icon: DashboardCircleIcon },
   { title: "Live Map", href: "/live-map", icon: MapsIcon },
   { title: "Analytics", href: "/analytics", icon: BarChartIcon },
+  { title: "Reports", href: "/reports", icon: File02Icon },
   { title: "Predictions", href: "/predictions", icon: AiBrain01Icon },
 ]
 
@@ -34,6 +36,7 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
+    <TooltipProvider>
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <div className="flex items-center justify-between px-2 py-1 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
@@ -60,6 +63,7 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       render={<Link href={item.href} />}
                       isActive={active}
+                      tooltip={item.title}
                       className={cn(
                         "h-9 gap-3 rounded-lg px-3 font-normal tracking-[-0.01em] text-sidebar-foreground/70 transition-[background-color,color] duration-150 ease-out-quart",
                         active &&
@@ -82,7 +86,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <div className="flex items-center justify-between px-2">
+        <div className="flex items-center justify-between px-2 gap-1 group-data-[collapsible=icon]:flex-col group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
           <a
             href="https://github.com/GiannisBab/moovio"
             target="_blank"
@@ -97,5 +101,6 @@ export function AppSidebar() {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
+    </TooltipProvider>
   )
 }

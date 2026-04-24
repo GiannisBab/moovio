@@ -1,22 +1,29 @@
 "use client"
+
+import * as React from "react"
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Alert01Icon } from "@hugeicons/core-free-icons";
 import type { CongestionAlert } from "@/lib/data/dashboard-data"
 
-function getGreeting(): string {
-  const hour = new Date().getHours()
+function greetingForHour(hour: number): string {
   if (hour < 12) return "Good morning"
   if (hour < 18) return "Good afternoon"
   return "Good evening"
 }
 
 export function WelcomeSection({ alerts }: { alerts: CongestionAlert[] }) {
+  const [greeting, setGreeting] = React.useState("Welcome")
+
+  React.useEffect(() => {
+    setGreeting(greetingForHour(new Date().getHours()))
+  }, [])
+
   const criticalCount = alerts.filter((a) => a.severity === "critical").length
   const warningCount = alerts.filter((a) => a.severity === "warning").length
 
   return (
     <div>
-      <h2 className="text-2xl font-bold tracking-tight">{getGreeting()}</h2>
+      <h2 className="text-2xl font-bold tracking-tight">{greeting}</h2>
       <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
         {criticalCount > 0 && (
           <>

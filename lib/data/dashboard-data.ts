@@ -1,46 +1,8 @@
 import type { ChartConfig } from "@/components/ui/chart"
+import { REFERENCE_TODAY } from "@/lib/analytics-filter"
+import { congestionReports } from "@/lib/data/reports-data"
 
-// KPI Data
-export type KpiItem = {
-  title: string
-  value: string
-  change: string
-  changeType: "positive" | "negative"
-  icon: "Route" | "Car" | "Gauge" | "Leaf"
-}
-
-export const kpiData: KpiItem[] = [
-  {
-    title: "Total Trips Today",
-    value: "284,391",
-    change: "+12.5%",
-    changeType: "positive",
-    icon: "Route",
-  },
-  {
-    title: "Active Vehicles",
-    value: "12,847",
-    change: "+3.2%",
-    changeType: "positive",
-    icon: "Car",
-  },
-  {
-    title: "Avg Speed",
-    value: "34.2 km/h",
-    change: "-2.1%",
-    changeType: "negative",
-    icon: "Gauge",
-  },
-  {
-    title: "CO2 Saved",
-    value: "18.4 tons",
-    change: "+8.7%",
-    changeType: "positive",
-    icon: "Leaf",
-  },
-]
-
-// Traffic Flow (hourly)
+// Traffic Flow (24h hourly snapshot — distinct from analytics' daily granularity)
 export const trafficFlowData = [
   { hour: "00:00", vehicles: 1200, avgSpeed: 58 },
   { hour: "01:00", vehicles: 800, avgSpeed: 62 },
@@ -73,14 +35,7 @@ export const trafficFlowChartConfig = {
   avgSpeed: { label: "Avg Speed (km/h)", color: "var(--chart-2)" },
 } satisfies ChartConfig
 
-// Modal Split
-export const modalSplitData = [
-  { mode: "Car", percentage: 45, fill: "var(--chart-1)" },
-  { mode: "Bus", percentage: 25, fill: "var(--chart-2)" },
-  { mode: "Bike", percentage: 18, fill: "var(--chart-3)" },
-  { mode: "Walk", percentage: 12, fill: "var(--chart-4)" },
-]
-
+// Modal Split chart config — data is computed by consumer from analytics' modalSplitTrendData
 export const modalSplitChartConfig = {
   percentage: { label: "Percentage" },
   Car: { label: "Car", color: "var(--chart-1)" },
@@ -89,54 +44,7 @@ export const modalSplitChartConfig = {
   Walk: { label: "Walk", color: "var(--chart-4)" },
 } satisfies ChartConfig
 
-// Congestion Alerts
-export type CongestionAlert = {
-  id: string
-  location: string
-  severity: "critical" | "warning" | "info"
-  description: string
-  time: string
-}
-
-export const congestionAlerts: CongestionAlert[] = [
-  {
-    id: "1",
-    location: "Highway A1 — Northbound",
-    severity: "critical",
-    description: "Major accident, 3 lanes blocked. Expect 45min delay.",
-    time: "2 min ago",
-  },
-  {
-    id: "2",
-    location: "Main St & 5th Ave",
-    severity: "warning",
-    description: "Construction zone reducing traffic to single lane.",
-    time: "15 min ago",
-  },
-  {
-    id: "3",
-    location: "Central Station Area",
-    severity: "warning",
-    description: "Unusual congestion due to event at nearby stadium.",
-    time: "28 min ago",
-  },
-  {
-    id: "4",
-    location: "Ring Road — Eastbound",
-    severity: "info",
-    description: "Moderate traffic buildup, clearing gradually.",
-    time: "42 min ago",
-  },
-  {
-    id: "5",
-    location: "Industrial Park Rd",
-    severity: "info",
-    description: "Scheduled road maintenance, minor delays expected.",
-    time: "1 hr ago",
-  },
-]
-
-// Ridership Trends (weekly)
+// Ridership (weekly cycle by transit mode — distinct from analytics' top stations)
 export const ridershipData = [
   { day: "Mon", bus: 45200, metro: 62100, tram: 18400 },
   { day: "Tue", bus: 47800, metro: 64500, tram: 19200 },
@@ -152,3 +60,43 @@ export const ridershipChartConfig = {
   metro: { label: "Metro", color: "var(--chart-2)" },
   tram: { label: "Tram", color: "var(--chart-3)" },
 } satisfies ChartConfig
+
+// Congestion Alerts — derived from the canonical congestionReports pool
+export type CongestionAlert = {
+  id: string
+  location: string
+  severity: "critical" | "warning" | "info"
+  description: string
+  time: string
+}
+
+function relativeTime(dateStr: string): string {
+  const d = new Date(`${dateStr}T00:00:00Z`)
+  const diffMs = REFERENCE_TODAY.getTime() - d.getTime()
+  const days = Math.round(diffMs / (1000 * 60 * 60 * 24))
+  if (days === 0) return "today"
+  if (days === 1) return "yesterday"
+  if (days < 7) return `${days} days ago`
+  if (days < 14) return "1 week ago"
+  return `${Math.floor(days / 7)} weeks ago`
+}
+
+const SEVERITY_RANK: Record<CongestionAlert["severity"], number> = {
+  critical: 0,
+  warning: 1,
+  info: 2,
+}
+
+export const congestionAlerts: CongestionAlert[] = [...congestionReports]
+  .sort((a, b) => {
+    if (a.date !== b.date) return a.date < b.date ? 1 : -1
+    return SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity]
+  })
+  .slice(0, 5)
+  .map((r) => ({
+    id: r.id,
+    location: r.location,
+    severity: r.severity,
+    description: `Peak congestion at ${r.peakHour} · sustained for ${r.durationMin} min`,
+    time: relativeTime(r.date),
+  }))

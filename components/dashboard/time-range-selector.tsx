@@ -1,22 +1,26 @@
 "use client"
 
-import { useState } from "react"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
-const ranges = [
+export type DashboardRange = "today" | "week" | "month"
+
+const ranges: { value: DashboardRange; label: string }[] = [
   { value: "today", label: "Today" },
   { value: "week", label: "This Week" },
   { value: "month", label: "This Month" },
 ]
 
-export function TimeRangeSelector() {
-  const [value, setValue] = useState("today")
+type Props = {
+  value: DashboardRange
+  onChange: (value: DashboardRange) => void
+}
 
+export function TimeRangeSelector({ value, onChange }: Props) {
   return (
     <ToggleGroup
       value={[value]}
       onValueChange={(val) => {
-        if (val.length > 0) setValue(val[0])
+        if (val.length > 0) onChange(val[0] as DashboardRange)
       }}
       variant="outline"
       size="sm"

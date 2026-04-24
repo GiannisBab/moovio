@@ -1,7 +1,7 @@
 "use client"
 
 import { HugeiconsIcon } from "@hugeicons/react";
-import { AiBrain01Icon, Alert01Icon, BarChartIcon, Calendar01Icon, Car01Icon, ConstructionIcon, DashboardCircleIcon, MapsIcon, Notification01Icon, OctagonIcon, Search01Icon, Shield01Icon } from "@hugeicons/core-free-icons";
+import { AiBrain01Icon, Alert01Icon, BarChartIcon, Calendar01Icon, Car01Icon, ConstructionIcon, DashboardCircleIcon, File02Icon, MapsIcon, Notification01Icon, OctagonIcon, Search01Icon, Shield01Icon } from "@hugeicons/core-free-icons";
 import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -37,14 +37,16 @@ import { incidents } from "@/lib/data/live-map-data"
 const pageTitles: Record<string, string> = {
   "/": "Dashboard",
   "/live-map": "Live Map",
-  "/analytics": "Analytics & Reports",
+  "/analytics": "Analytics",
+  "/reports": "Reports",
   "/predictions": "AI Predictions",
 }
 
 const pages = [
   { title: "Dashboard", href: "/", icon: DashboardCircleIcon },
   { title: "Live Map", href: "/live-map", icon: MapsIcon },
-  { title: "Analytics & Reports", href: "/analytics", icon: BarChartIcon },
+  { title: "Analytics", href: "/analytics", icon: BarChartIcon },
+  { title: "Reports", href: "/reports", icon: File02Icon },
   { title: "AI Predictions", href: "/predictions", icon: AiBrain01Icon },
 ]
 

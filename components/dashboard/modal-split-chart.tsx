@@ -15,18 +15,39 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart"
-import {
-  modalSplitData,
-  modalSplitChartConfig,
-} from "@/lib/data/dashboard-data"
+import { modalSplitChartConfig } from "@/lib/data/dashboard-data"
+import type { ModalSplitPoint } from "@/lib/data/analytics-data"
 import { cn } from "@/lib/utils"
 
-export function ModalSplitChart({ className }: { className?: string }) {
+type Slice = { mode: string; percentage: number; fill: string }
+
+function average(values: number[]): number {
+  return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0
+}
+
+function buildSlices(data: ModalSplitPoint[]): Slice[] {
+  return [
+    { mode: "Car", percentage: average(data.map((d) => d.car)), fill: "var(--chart-1)" },
+    { mode: "Bus", percentage: average(data.map((d) => d.bus)), fill: "var(--chart-2)" },
+    { mode: "Bike", percentage: average(data.map((d) => d.bike)), fill: "var(--chart-3)" },
+    { mode: "Walk", percentage: average(data.map((d) => d.walk)), fill: "var(--chart-4)" },
+  ]
+}
+
+export function ModalSplitChart({
+  data,
+  className,
+}: {
+  data: ModalSplitPoint[]
+  className?: string
+}) {
+  const slices = buildSlices(data)
+
   return (
     <Card className={cn(className)}>
       <CardHeader>
         <CardTitle>Modal Split</CardTitle>
-        <CardDescription>Transport mode distribution</CardDescription>
+        <CardDescription>Average mode share for the period</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer
@@ -36,7 +57,7 @@ export function ModalSplitChart({ className }: { className?: string }) {
           <PieChart>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <Pie
-              data={modalSplitData}
+              data={slices}
               dataKey="percentage"
               nameKey="mode"
               innerRadius={60}

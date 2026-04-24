@@ -34,6 +34,7 @@ export function DateRangePicker({ value, onChange, className }: Props) {
     from: value.range.from,
     to: value.range.to,
   })
+  const pendingChangeRef = React.useRef<AnalyticsFilter | null>(null)
 
   React.useEffect(() => {
     if (open) {
@@ -48,23 +49,34 @@ export function DateRangePicker({ value, onChange, className }: Props) {
 
   const applyPreset = (preset: Exclude<AnalyticsPreset, "custom">) => {
     if (preset !== value.preset) {
-      onChange({ preset, range: resolvePreset(preset) })
+      pendingChangeRef.current = { preset, range: resolvePreset(preset) }
     }
     setOpen(false)
   }
 
   const applyCustom = () => {
     if (draft?.from && draft.to) {
-      onChange({
+      pendingChangeRef.current = {
         preset: "custom",
         range: { from: draft.from, to: draft.to },
-      })
+      }
       setOpen(false)
     }
   }
 
+  const handleOpenChangeComplete = (isOpen: boolean) => {
+    if (!isOpen && pendingChangeRef.current) {
+      onChange(pendingChangeRef.current)
+      pendingChangeRef.current = null
+    }
+  }
+
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover
+      open={open}
+      onOpenChange={setOpen}
+      onOpenChangeComplete={handleOpenChangeComplete}
+    >
       <PopoverTrigger
         render={
           <Button

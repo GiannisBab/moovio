@@ -2,6 +2,8 @@
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Bus01Icon, Train02Icon, TramIcon, UniversalAccessIcon, ZapIcon } from "@hugeicons/core-free-icons";
+import { useTranslations } from "next-intl"
+import { useDataLabel } from "@/components/i18n-provider"
 import {
   MapMarker,
   MarkerContent,
@@ -15,7 +17,7 @@ const stopTypeConfig: Record<
   TransitStopType,
   {
     icon: typeof Bus01Icon
-    label: string
+    labelKey: "metro" | "busStop" | "tram" | "trolleybus"
     color: string
     bgColor: string
     markerBg: string
@@ -23,28 +25,28 @@ const stopTypeConfig: Record<
 > = {
   metro: {
     icon: Train02Icon,
-    label: "Metro",
+    labelKey: "metro",
     color: "text-blue-600 dark:text-blue-400",
     bgColor: "bg-blue-500/10",
     markerBg: "bg-blue-600",
   },
   bus: {
     icon: Bus01Icon,
-    label: "Bus Stop",
+    labelKey: "busStop",
     color: "text-emerald-600 dark:text-emerald-400",
     bgColor: "bg-emerald-500/10",
     markerBg: "bg-emerald-600",
   },
   tram: {
     icon: TramIcon,
-    label: "Tram",
+    labelKey: "tram",
     color: "text-cyan-600 dark:text-cyan-400",
     bgColor: "bg-cyan-500/10",
     markerBg: "bg-cyan-600",
   },
   trolleybus: {
     icon: ZapIcon,
-    label: "Trolleybus",
+    labelKey: "trolleybus",
     color: "text-amber-600 dark:text-amber-400",
     bgColor: "bg-amber-500/10",
     markerBg: "bg-amber-600",
@@ -52,6 +54,8 @@ const stopTypeConfig: Record<
 }
 
 export function TransitStopMarkers({ stops }: { stops: TransitStop[] }) {
+  const t = useTranslations("LiveMap")
+  const dl = useDataLabel()
   return (
     <>
       {stops.map((stop) => {
@@ -86,9 +90,9 @@ export function TransitStopMarkers({ stops }: { stops: TransitStop[] }) {
                       <HugeiconsIcon icon={config.icon} className={cn("size-4", config.color)} />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold">{stop.name}</p>
+                      <p className="text-sm font-semibold">{dl(stop.name)}</p>
                       <p className="text-[10px] text-muted-foreground">
-                        {config.label}
+                        {t(config.labelKey)}
                       </p>
                     </div>
                   </div>
@@ -103,7 +107,7 @@ export function TransitStopMarkers({ stops }: { stops: TransitStop[] }) {
                 {stop.accessible && (
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <HugeiconsIcon icon={UniversalAccessIcon} className="size-3" />
-                    Wheelchair accessible
+                    {t("wheelchairAccessible")}
                   </div>
                 )}
               </div>

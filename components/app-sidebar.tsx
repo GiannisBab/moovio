@@ -1,7 +1,7 @@
 "use client"
 
 import { HugeiconsIcon } from "@hugeicons/react";
-import { AiBrain01Icon, BarChartIcon, DashboardCircleIcon, File02Icon, GithubIcon, MapsIcon } from "@hugeicons/core-free-icons";
+import { AiBrain01Icon, BarChartIcon, DashboardCircleIcon, File02Icon, MapsIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Logo } from "@/components/logo"
@@ -20,20 +20,22 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { buttonVariants } from "@/components/ui/button"
+import { LanguageToggle } from "@/components/language-toggle"
+import { useTranslations } from "next-intl"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { title: "Dashboard", href: "/", icon: DashboardCircleIcon },
-  { title: "Live Map", href: "/live-map", icon: MapsIcon },
-  { title: "Analytics", href: "/analytics", icon: BarChartIcon },
-  { title: "Reports", href: "/reports", icon: File02Icon },
-  { title: "Predictions", href: "/predictions", icon: AiBrain01Icon },
-]
+  { key: "dashboard", href: "/", icon: DashboardCircleIcon },
+  { key: "liveMap", href: "/live-map", icon: MapsIcon },
+  { key: "analytics", href: "/analytics", icon: BarChartIcon },
+  { key: "reports", href: "/reports", icon: File02Icon },
+  { key: "predictions", href: "/predictions", icon: AiBrain01Icon },
+] as const
 
 export function AppSidebar() {
   const pathname = usePathname()
+  const t = useTranslations("Nav")
 
   return (
     <TooltipProvider>
@@ -49,7 +51,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="text-[11px] uppercase tracking-wider text-sidebar-foreground/50">
-            Navigation
+            {t("section")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="gap-0.5">
@@ -58,12 +60,13 @@ export function AppSidebar() {
                   item.href === "/"
                     ? pathname === "/"
                     : pathname.startsWith(item.href)
+                const label = t(item.key)
                 return (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={item.key}>
                     <SidebarMenuButton
                       render={<Link href={item.href} />}
                       isActive={active}
-                      tooltip={item.title}
+                      tooltip={label}
                       className={cn(
                         "h-9 gap-3 rounded-lg px-3 font-normal tracking-[-0.01em] text-sidebar-foreground/70 transition-[background-color,color] duration-150 ease-out-quart",
                         active &&
@@ -76,7 +79,7 @@ export function AppSidebar() {
                                                         ? "text-sidebar-accent-foreground"
                                                         : "text-sidebar-foreground/50"
                                                     )} strokeWidth={1.75} />
-                      <span>{item.title}</span>
+                      <span>{label}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 )
@@ -87,15 +90,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <div className="flex items-center justify-between px-2 gap-1 group-data-[collapsible=icon]:flex-col group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
-          <a
-            href="https://github.com/GiannisBab/moovio"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className={buttonVariants({ variant: "ghost", size: "icon-sm" })}
-          >
-            <HugeiconsIcon icon={GithubIcon} className="size-4" />
-          </a>
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </SidebarFooter>

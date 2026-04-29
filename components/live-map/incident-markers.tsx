@@ -2,6 +2,9 @@
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Calendar01Icon, CancelCircleIcon, Car02Icon, Clock01Icon, ConstructionIcon, Layers01Icon } from "@hugeicons/core-free-icons";
+import { useTranslations } from "next-intl"
+import { useDataLabel } from "@/components/i18n-provider"
+import { formatEnglishRelative } from "@/lib/i18n/relative-time"
 import { MapMarker, MarkerContent, MarkerPopup } from "@/components/ui/map"
 import { Badge } from "@/components/ui/badge"
 import type { Incident, IncidentType } from "@/lib/data/live-map-data"
@@ -11,32 +14,27 @@ const incidentTypeConfig: Record<
   IncidentType,
   {
     icon: typeof Car02Icon
-    label: string
     color: string
     markerBg: string
   }
 > = {
   accident: {
     icon: Car02Icon,
-    label: "Accident",
     color: "text-red-600 dark:text-red-400",
     markerBg: "bg-red-600",
   },
   roadwork: {
     icon: ConstructionIcon,
-    label: "Roadwork",
     color: "text-orange-600 dark:text-orange-400",
     markerBg: "bg-orange-500",
   },
   closure: {
     icon: CancelCircleIcon,
-    label: "Closure",
     color: "text-rose-600 dark:text-rose-400",
     markerBg: "bg-rose-600",
   },
   event: {
     icon: Calendar01Icon,
-    label: "Event",
     color: "text-violet-600 dark:text-violet-400",
     markerBg: "bg-violet-500",
   },
@@ -52,6 +50,10 @@ const severityBadge = {
 }
 
 export function IncidentMarkers({ incidents }: { incidents: Incident[] }) {
+  const tType = useTranslations("IncidentTypes")
+  const tMap = useTranslations("LiveMap")
+  const tTime = useTranslations("RelativeTime")
+  const dl = useDataLabel()
   return (
     <>
       {incidents.map((incident) => {
@@ -90,34 +92,34 @@ export function IncidentMarkers({ incidents }: { incidents: Incident[] }) {
                   <div className="flex items-center gap-1.5">
                     <HugeiconsIcon icon={config.icon} className={cn("size-3.5", config.color)} />
                     <span className="font-semibold text-sm">
-                      {incident.title}
+                      {dl(incident.title)}
                     </span>
                   </div>
                   <Badge variant={badge.variant} className={badge.className}>
-                    {config.label}
+                    {tType(incident.type)}
                   </Badge>
                 </div>
                 <p className="text-[11px] text-muted-foreground font-medium">
-                  {incident.location}
+                  {dl(incident.location)}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {incident.description}
+                  {dl(incident.description)}
                 </p>
                 <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <HugeiconsIcon icon={Clock01Icon} className="size-3" />
-                    {incident.reportedAt}
+                    {formatEnglishRelative(incident.reportedAt, tTime)}
                   </span>
                   {incident.estimatedClearance && (
                     <span className="flex items-center gap-1">
                       <HugeiconsIcon icon={Clock01Icon} className="size-3" />
-                      ETA: {incident.estimatedClearance}
+                      {tMap("eta", { value: dl(incident.estimatedClearance) })}
                     </span>
                   )}
                   {incident.lanesAffected && (
                     <span className="flex items-center gap-1">
                       <HugeiconsIcon icon={Layers01Icon} className="size-3" />
-                      {incident.lanesAffected} lane{incident.lanesAffected > 1 ? "s" : ""} affected
+                      {tMap("lanesAffected", { count: incident.lanesAffected })}
                     </span>
                   )}
                 </div>

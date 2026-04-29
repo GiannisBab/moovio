@@ -1,7 +1,11 @@
+"use client"
+
 import type { CSSProperties } from "react"
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Alert01Icon, AlertCircleIcon, ArrowRight01Icon, Clock01Icon, InformationCircleIcon } from "@hugeicons/core-free-icons";
 import Link from "next/link"
+import { useTranslations } from "next-intl"
+import { useDataLabel } from "@/components/i18n-provider"
 import {
   Card,
   CardHeader,
@@ -19,19 +23,19 @@ const severityConfig = {
   critical: {
     icon: Alert01Icon,
     badge: "destructive" as const,
-    label: "Critical",
+    labelKey: "critical" as const,
     iconClass: "text-red-600 dark:text-red-400",
   },
   warning: {
     icon: AlertCircleIcon,
     badge: "outline" as const,
-    label: "Warning",
+    labelKey: "warning" as const,
     iconClass: "text-amber-600 dark:text-amber-400",
   },
   info: {
     icon: InformationCircleIcon,
     badge: "secondary" as const,
-    label: "Info",
+    labelKey: "info" as const,
     iconClass: "text-blue-600 dark:text-blue-400",
   },
 }
@@ -43,19 +47,31 @@ export function CongestionAlerts({
   data: CongestionAlert[]
   className?: string
 }) {
+  const t = useTranslations("CongestionAlerts")
+  const tAlertText = useTranslations("AlertText")
+  const tTime = useTranslations("RelativeTime")
+  const dl = useDataLabel()
+
+  const formatRelative = (daysAgo: number) => {
+    if (daysAgo <= 0) return tTime("today")
+    if (daysAgo === 1) return tTime("yesterday")
+    if (daysAgo < 7) return tTime("daysAgo", { count: daysAgo })
+    return tTime("weeksAgo", { count: Math.floor(daysAgo / 7) })
+  }
+
   return (
     <Card className={cn(className)}>
       <CardHeader>
         <div>
-          <CardTitle>Congestion Alerts</CardTitle>
-          <CardDescription>Active incidents and warnings</CardDescription>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>{t("description")}</CardDescription>
         </div>
         <CardAction>
           <Link
             href="/live-map"
             className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
-            View all
+            {t("viewAll")}
             <HugeiconsIcon icon={ArrowRight01Icon} className="size-3" />
           </Link>
         </CardAction>
@@ -79,7 +95,7 @@ export function CongestionAlerts({
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-sm font-medium">
-                        {alert.location}
+                        {dl(alert.location)}
                       </span>
                       <Badge
                         variant={config.badge}
@@ -89,15 +105,18 @@ export function CongestionAlerts({
                             : undefined
                         }
                       >
-                        {config.label}
+                        {t(config.labelKey)}
                       </Badge>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      {alert.description}
+                      {tAlertText("peakDescription", {
+                        peak: alert.peakHour,
+                        duration: alert.durationMin,
+                      })}
                     </p>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
                       <HugeiconsIcon icon={Clock01Icon} className="size-3" />
-                      {alert.time}
+                      {formatRelative(alert.daysAgo)}
                     </div>
                   </div>
                 </div>

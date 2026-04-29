@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useTranslations } from "next-intl"
 import {
   ArrowDown01Icon,
   ArrowUp01Icon,
@@ -49,8 +50,10 @@ export function ReportTable<T extends { id: string | number }>({
   pageSize = 10,
   initialSortKey,
   initialSortDir = "desc",
-  emptyMessage = "No records",
+  emptyMessage,
 }: Props<T>) {
+  const t = useTranslations("Reports")
+  const empty = emptyMessage ?? t("noRecords")
   const firstSortable = columns.find((c) => c.sortable !== false)?.key
   const [sortKey, setSortKey] = React.useState<(keyof T & string) | undefined>(
     initialSortKey ?? firstSortable,
@@ -159,7 +162,7 @@ export function ReportTable<T extends { id: string | number }>({
                   colSpan={columns.length}
                   className="py-8 text-center text-muted-foreground"
                 >
-                  {emptyMessage}
+                  {empty}
                 </TableCell>
               </TableRow>
             )}
@@ -184,8 +187,11 @@ export function ReportTable<T extends { id: string | number }>({
       </div>
       <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
         <span className="text-xs text-muted-foreground">
-          Showing {sorted.length === 0 ? 0 : safePage * pageSize + 1}–
-          {Math.min(sorted.length, (safePage + 1) * pageSize)} of {sorted.length}
+          {t("showing", {
+            from: sorted.length === 0 ? 0 : safePage * pageSize + 1,
+            to: Math.min(sorted.length, (safePage + 1) * pageSize),
+            total: sorted.length,
+          })}
         </span>
         {pageCount > 1 && (
           <Pagination className="sm:mx-0 sm:w-auto sm:justify-end">

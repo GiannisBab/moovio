@@ -1,6 +1,7 @@
 "use client"
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { useTranslations } from "next-intl"
 import {
   Card,
   CardHeader,
@@ -15,22 +16,27 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart"
-import { ridershipData, ridershipChartConfig } from "@/lib/data/dashboard-data"
+import { ridershipData, buildRidershipChartConfig } from "@/lib/data/dashboard-data"
 import { cn } from "@/lib/utils"
 
 export function RidershipChart({ className }: { className?: string }) {
+  const t = useTranslations("Ridership")
+  const tChart = useTranslations("ChartLabels")
+  const tDays = useTranslations("Days")
+  const ridershipChartConfig = buildRidershipChartConfig(tChart)
+  const data = ridershipData.map((d) => ({ ...d, dayLabel: tDays(d.day as "Mon") }))
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Ridership Trends</CardTitle>
-        <CardDescription>Weekly public transport usage</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={ridershipChartConfig} className="h-[300px] w-full">
-          <BarChart data={ridershipData}>
+          <BarChart data={data}>
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="day"
+              dataKey="dayLabel"
               tickLine={false}
               axisLine={false}
               tickMargin={8}

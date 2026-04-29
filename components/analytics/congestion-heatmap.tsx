@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import {
   Card,
   CardHeader,
@@ -31,6 +32,8 @@ function intensityClass(value: number): string {
 }
 
 export function CongestionHeatmap({ className }: { className?: string }) {
+  const t = useTranslations("Heatmap")
+  const tDays = useTranslations("Days")
   const grid = new Map<string, number>()
   for (const cell of congestionHeatmapData) {
     grid.set(`${cell.day}-${cell.hour}`, cell.congestion)
@@ -39,10 +42,8 @@ export function CongestionHeatmap({ className }: { className?: string }) {
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Congestion Heatmap</CardTitle>
-        <CardDescription>
-          Average congestion by day of week and hour
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <TooltipProvider delay={120}>
@@ -61,7 +62,7 @@ export function CongestionHeatmap({ className }: { className?: string }) {
                 {heatmapDays.map((day) => (
                   <div key={day} className="contents">
                     <div className="flex items-center text-xs text-muted-foreground">
-                      {day}
+                      {tDays(day)}
                     </div>
                     {HOURS.map((h) => {
                       const v = grid.get(`${day}-${h}`) ?? 0
@@ -80,10 +81,10 @@ export function CongestionHeatmap({ className }: { className?: string }) {
                           <TooltipContent side="top">
                             <div className="flex flex-col gap-0.5">
                               <span className="font-medium">
-                                {day} · {h.toString().padStart(2, "0")}:00
+                                {tDays(day)} · {h.toString().padStart(2, "0")}:00
                               </span>
                               <span className="text-background/70">
-                                Congestion {v}%
+                                {t("congestion", { value: v })}
                               </span>
                             </div>
                           </TooltipContent>
@@ -94,7 +95,7 @@ export function CongestionHeatmap({ className }: { className?: string }) {
                 ))}
               </div>
               <div className="mt-4 flex items-center justify-end gap-2 text-[10px] text-muted-foreground">
-                <span>Low</span>
+                <span>{t("low")}</span>
                 <div className="flex h-2 w-32 overflow-hidden rounded-sm">
                   <div className="flex-1 bg-chart-1/[0.06]" />
                   <div className="flex-1 bg-chart-1/15" />
@@ -103,7 +104,7 @@ export function CongestionHeatmap({ className }: { className?: string }) {
                   <div className="flex-1 bg-chart-1/70" />
                   <div className="flex-1 bg-chart-1/90" />
                 </div>
-                <span>High</span>
+                <span>{t("high")}</span>
               </div>
             </div>
           </div>

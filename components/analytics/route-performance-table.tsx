@@ -2,6 +2,8 @@
 
 import * as React from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useTranslations } from "next-intl"
+import { useDataLabel } from "@/components/i18n-provider"
 import {
   ArrowDown01Icon,
   ArrowUp01Icon,
@@ -33,12 +35,19 @@ import { cn } from "@/lib/utils"
 type SortKey = keyof Omit<RoutePerformance, "id">
 type SortDir = "asc" | "desc"
 
-const COLUMNS: { key: SortKey; label: string; align?: "right" }[] = [
-  { key: "name", label: "Route" },
-  { key: "trips", label: "Trips", align: "right" },
-  { key: "avgSpeed", label: "Avg Speed (km/h)", align: "right" },
-  { key: "delayMin", label: "Delay (min)", align: "right" },
-  { key: "congestionScore", label: "Congestion", align: "right" },
+type ColumnLabelKey =
+  | "route"
+  | "trips"
+  | "avgSpeed"
+  | "delay"
+  | "congestion"
+
+const COLUMNS: { key: SortKey; labelKey: ColumnLabelKey; align?: "right" }[] = [
+  { key: "name", labelKey: "route" },
+  { key: "trips", labelKey: "trips", align: "right" },
+  { key: "avgSpeed", labelKey: "avgSpeed", align: "right" },
+  { key: "delayMin", labelKey: "delay", align: "right" },
+  { key: "congestionScore", labelKey: "congestion", align: "right" },
 ]
 
 function congestionVariant(score: number): "destructive" | "outline" | "secondary" {
@@ -48,6 +57,8 @@ function congestionVariant(score: number): "destructive" | "outline" | "secondar
 }
 
 export function RoutePerformanceTable({ className }: { className?: string }) {
+  const t = useTranslations("RoutePerformance")
+  const dl = useDataLabel()
   const [sortKey, setSortKey] = React.useState<SortKey>("trips")
   const [sortDir, setSortDir] = React.useState<SortDir>("desc")
 
@@ -78,10 +89,8 @@ export function RoutePerformanceTable({ className }: { className?: string }) {
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Route Performance</CardTitle>
-        <CardDescription>
-          Top corridors by volume, speed, and delay
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
@@ -102,7 +111,7 @@ export function RoutePerformanceTable({ className }: { className?: string }) {
                       col.align === "right" && "justify-end",
                     )}
                   >
-                    {col.label}
+                    {t(col.labelKey)}
                     <HugeiconsIcon
                       icon={
                         sortKey === col.key
@@ -126,7 +135,7 @@ export function RoutePerformanceTable({ className }: { className?: string }) {
           <TableBody>
             {sorted.map((row) => (
               <TableRow key={row.id}>
-                <TableCell className="font-medium">{row.name}</TableCell>
+                <TableCell className="font-medium">{dl(row.name)}</TableCell>
                 <TableCell className="text-right tabular-nums">
                   {row.trips.toLocaleString()}
                 </TableCell>

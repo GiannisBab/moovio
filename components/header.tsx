@@ -5,6 +5,12 @@ import { AiBrain01Icon, Alert01Icon, BarChartIcon, Calendar01Icon, Car01Icon, Co
 import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
+import { useDataLabel } from "@/components/i18n-provider"
+import {
+  formatEnglishRelative,
+  parseRelativeMinutes,
+} from "@/lib/i18n/relative-time"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Kbd } from "@/components/ui/kbd"
@@ -34,20 +40,20 @@ import { cn } from "@/lib/utils"
 import { congestionAlerts } from "@/lib/data/dashboard-data"
 import { incidents } from "@/lib/data/live-map-data"
 
-const pageTitles: Record<string, string> = {
-  "/": "Dashboard",
-  "/live-map": "Live Map",
-  "/analytics": "Analytics",
-  "/reports": "Reports",
-  "/predictions": "AI Predictions",
+const pageTitleKeys: Record<string, "dashboard" | "liveMap" | "analytics" | "reports" | "predictions"> = {
+  "/": "dashboard",
+  "/live-map": "liveMap",
+  "/analytics": "analytics",
+  "/reports": "reports",
+  "/predictions": "predictions",
 }
 
 const pages = [
-  { title: "Dashboard", href: "/", icon: DashboardCircleIcon },
-  { title: "Live Map", href: "/live-map", icon: MapsIcon },
-  { title: "Analytics", href: "/analytics", icon: BarChartIcon },
-  { title: "Reports", href: "/reports", icon: File02Icon },
-  { title: "AI Predictions", href: "/predictions", icon: AiBrain01Icon },
+  { key: "dashboard" as const, href: "/", icon: DashboardCircleIcon },
+  { key: "liveMap" as const, href: "/live-map", icon: MapsIcon },
+  { key: "analytics" as const, href: "/analytics", icon: BarChartIcon },
+  { key: "reports" as const, href: "/reports", icon: File02Icon },
+  { key: "predictions" as const, href: "/predictions", icon: AiBrain01Icon },
 ]
 
 const incidentIcons: Record<string, typeof Car01Icon> = {
@@ -63,38 +69,72 @@ const severityVariant: Record<string, "destructive" | "outline" | "secondary"> =
   info: "secondary",
 }
 
-const allNotifications = [
-  ...incidents.map((inc) => ({
+type NotificationItem = {
+  id: string
+  title: string
+  description: string
+  severity: "critical" | "warning" | "info"
+  rawTime: string | null
+  daysAgo: number | null
+  icon: typeof Car01Icon
+  href: string
+  sortMinutes: number
+}
+
+const allNotifications: NotificationItem[] = [
+  ...incidents.map<NotificationItem>((inc) => ({
     id: inc.id,
     title: inc.title,
     description: inc.location,
     severity: inc.severity,
-    time: inc.reportedAt,
+    rawTime: inc.reportedAt,
+    daysAgo: null,
     icon: incidentIcons[inc.type] ?? Shield01Icon,
     href: "/live-map",
+    sortMinutes: parseRelativeMinutes(inc.reportedAt),
   })),
-  ...congestionAlerts.map((alert) => ({
+  ...congestionAlerts.map<NotificationItem>((alert) => ({
     id: alert.id,
     title: alert.location,
-    description: alert.description,
+    description: `peak:${alert.peakHour}|dur:${alert.durationMin}`,
     severity: alert.severity,
-    time: alert.time,
+    rawTime: null,
+    daysAgo: alert.daysAgo,
     icon: Alert01Icon,
     href: "/",
+    sortMinutes: alert.daysAgo * 24 * 60,
   })),
-].sort((a, b) => {
-  const extractMinutes = (t: string) => {
-    const m = t.match(/(\d+)\s*min/)
-    const h = t.match(/(\d+)\s*h/)
-    return m ? Number(m[1]) : h ? Number(h[1]) * 60 : 999
-  }
-  return extractMinutes(a.time) - extractMinutes(b.time)
-})
+].sort((a, b) => a.sortMinutes - b.sortMinutes)
 
 export function Header() {
   const pathname = usePathname()
   const router = useRouter()
-  const title = pageTitles[pathname] ?? "Dashboard"
+  const t = useTranslations("Header")
+  const tSeverity = useTranslations("Severity")
+  const tTime = useTranslations("RelativeTime")
+  const tAlertText = useTranslations("AlertText")
+  const dl = useDataLabel()
+  const titleKey = pageTitleKeys[pathname] ?? "dashboard"
+  const title = t(titleKey)
+
+  const formatNotificationTime = (n: NotificationItem) => {
+    if (n.daysAgo !== null) {
+      if (n.daysAgo <= 0) return tTime("today")
+      if (n.daysAgo === 1) return tTime("yesterday")
+      if (n.daysAgo < 7) return tTime("daysAgo", { count: n.daysAgo })
+      return tTime("weeksAgo", { count: Math.floor(n.daysAgo / 7) })
+    }
+    if (n.rawTime) return formatEnglishRelative(n.rawTime, tTime)
+    return ""
+  }
+
+  const formatNotificationDescription = (n: NotificationItem) => {
+    const m = n.description.match(/^peak:(.+)\|dur:(\d+)$/)
+    if (m) {
+      return tAlertText("peakDescription", { peak: m[1], duration: Number(m[2]) })
+    }
+    return dl(n.description)
+  }
   const [searchOpen, setSearchOpen] = useState(false)
   const [readIds, setReadIds] = useState<Set<string>>(new Set())
   const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set())
@@ -140,13 +180,13 @@ export function Header() {
         <BreadcrumbList>
           {pathname === "/" ? (
             <BreadcrumbItem>
-              <BreadcrumbPage>Dashboard</BreadcrumbPage>
+              <BreadcrumbPage>{t("dashboard")}</BreadcrumbPage>
             </BreadcrumbItem>
           ) : (
             <>
               <BreadcrumbItem>
                 <BreadcrumbLink render={<Link href="/" />}>
-                  Home
+                  {t("home")}
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -165,32 +205,32 @@ export function Header() {
           className="border-input bg-muted/40 text-muted-foreground hover:bg-muted flex h-8 w-8 items-center justify-center gap-2 rounded-md border text-sm transition-colors md:w-56 md:justify-start md:px-3"
         >
           <HugeiconsIcon icon={Search01Icon} className="size-3.5 shrink-0" />
-          <span className="hidden flex-1 text-left md:inline">Search...</span>
+          <span className="hidden flex-1 text-left md:inline">{t("search")}</span>
           <Kbd className="hidden md:inline">⌘K</Kbd>
         </button>
 
         <CommandDialog
           open={searchOpen}
           onOpenChange={setSearchOpen}
-          title="Search"
-          description="Search pages, alerts, and incidents"
+          title={t("searchTitle")}
+          description={t("searchDescription")}
         >
           <Command>
-            <CommandInput placeholder="Type to search..." />
+            <CommandInput placeholder={t("searchPlaceholder")} />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup heading="Pages">
+              <CommandEmpty>{t("noResults")}</CommandEmpty>
+              <CommandGroup heading={t("groupPages")}>
                 {pages.map((page) => (
                   <CommandItem
                     key={page.href}
                     onSelect={() => handleSelect(page.href)}
                   >
                     <HugeiconsIcon icon={page.icon} className="size-4" />
-                    {page.title}
+                    {t(page.key)}
                   </CommandItem>
                 ))}
               </CommandGroup>
-              <CommandGroup heading="Congestion Alerts">
+              <CommandGroup heading={t("groupCongestion")}>
                 {congestionAlerts.map((alert) => (
                   <CommandItem
                     key={alert.id}
@@ -198,21 +238,24 @@ export function Header() {
                   >
                     <HugeiconsIcon icon={Alert01Icon} className="size-4" />
                     <div className="flex flex-col">
-                      <span>{alert.location}</span>
+                      <span>{dl(alert.location)}</span>
                       <span className="text-muted-foreground text-xs">
-                        {alert.description}
+                        {tAlertText("peakDescription", {
+                          peak: alert.peakHour,
+                          duration: alert.durationMin,
+                        })}
                       </span>
                     </div>
                     <Badge
                       variant={severityVariant[alert.severity]}
                       className="ml-auto"
                     >
-                      {alert.severity}
+                      {tSeverity(alert.severity)}
                     </Badge>
                   </CommandItem>
                 ))}
               </CommandGroup>
-              <CommandGroup heading="Incidents">
+              <CommandGroup heading={t("groupIncidents")}>
                 {incidents.map((inc) => {
                   const icon = incidentIcons[inc.type] ?? Shield01Icon
                   return (
@@ -222,16 +265,16 @@ export function Header() {
                     >
                       <HugeiconsIcon icon={icon} className="size-4" />
                       <div className="flex flex-col">
-                        <span>{inc.title}</span>
+                        <span>{dl(inc.title)}</span>
                         <span className="text-muted-foreground text-xs">
-                          {inc.location}
+                          {dl(inc.location)}
                         </span>
                       </div>
                       <Badge
                         variant={severityVariant[inc.severity]}
                         className="ml-auto"
                       >
-                        {inc.severity}
+                        {tSeverity(inc.severity)}
                       </Badge>
                     </CommandItem>
                   )
@@ -259,14 +302,14 @@ export function Header() {
           </PopoverTrigger>
           <PopoverContent align="end" className="w-96 gap-0 p-0">
             <div className="flex items-center justify-between border-b px-4 py-3">
-              <h3 className="text-sm font-semibold">Notifications</h3>
+              <h3 className="text-sm font-semibold">{t("notifications")}</h3>
               <div className="flex items-center gap-3">
                 {unreadCount > 0 && (
                   <button
                     onClick={handleMarkAllRead}
                     className="text-xs text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    Mark all read
+                    {t("markAllRead")}
                   </button>
                 )}
                 {visibleNotifications.length > 0 && (
@@ -274,7 +317,7 @@ export function Header() {
                     onClick={handleClearAll}
                     className="text-xs text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    Clear all
+                    {t("clearAll")}
                   </button>
                 )}
               </div>
@@ -283,7 +326,7 @@ export function Header() {
               {visibleNotifications.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
                   <HugeiconsIcon icon={Notification01Icon} className="mb-2 size-8 opacity-30" />
-                  <p className="text-sm">No notifications</p>
+                  <p className="text-sm">{t("noNotifications")}</p>
                 </div>
               ) : (
                 visibleNotifications.map((n) => (
@@ -302,20 +345,20 @@ export function Header() {
                     <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                       <div className="flex items-center justify-between gap-2">
                         <span className="truncate text-sm font-medium">
-                          {n.title}
+                          {dl(n.title)}
                         </span>
                         <Badge
                           variant={severityVariant[n.severity]}
                           className="shrink-0"
                         >
-                          {n.severity}
+                          {tSeverity(n.severity)}
                         </Badge>
                       </div>
                       <span className="text-muted-foreground truncate text-xs">
-                        {n.description}
+                        {formatNotificationDescription(n)}
                       </span>
                       <span className="text-muted-foreground text-xs">
-                        {n.time}
+                        {formatNotificationTime(n)}
                       </span>
                     </div>
                   </button>

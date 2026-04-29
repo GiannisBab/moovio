@@ -3,6 +3,8 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowUpRight01Icon, Video01Icon } from "@hugeicons/core-free-icons";
 import { useRef, useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
+import { useDataLabel } from "@/components/i18n-provider"
 import { MapMarker, MarkerContent, MarkerPopup } from "@/components/ui/map"
 import type { TrafficCamera } from "@/lib/data/live-map-data"
 import { cn } from "@/lib/utils"
@@ -28,6 +30,7 @@ function usePopupVisibility(containerRef: React.RefObject<HTMLDivElement | null>
 }
 
 function HlsPlayer({ url }: { url: string }) {
+  const t = useTranslations("LiveMap")
   const videoRef = useRef<HTMLVideoElement>(null)
   const hlsRef = useRef<Hls | null>(null)
   const [error, setError] = useState(false)
@@ -74,7 +77,7 @@ function HlsPlayer({ url }: { url: string }) {
   if (error) {
     return (
       <div className="flex items-center justify-center h-full bg-muted rounded text-xs text-muted-foreground">
-        Stream unavailable
+        {t("streamUnavailable")}
       </div>
     )
   }
@@ -104,6 +107,7 @@ export function CameraFeedMarkers({
 }
 
 function CameraPopupContent({ camera }: { camera: TrafficCamera }) {
+  const dl = useDataLabel()
   const containerRef = useRef<HTMLDivElement>(null)
   const visible = usePopupVisibility(containerRef)
 
@@ -124,10 +128,10 @@ function CameraPopupContent({ camera }: { camera: TrafficCamera }) {
           <HugeiconsIcon icon={Video01Icon} className="size-4 text-sky-500" />
         </div>
         <div>
-          <p className="text-sm font-semibold">{camera.name}</p>
+          <p className="text-sm font-semibold">{dl(camera.name)}</p>
           <p className="text-[10px] text-muted-foreground flex items-center gap-1">
             <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-3" />
-            {camera.direction}
+            {dl(camera.direction)}
           </p>
         </div>
       </div>

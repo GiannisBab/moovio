@@ -7,6 +7,7 @@ import {
   AlertCircleIcon,
   Clock01Icon,
 } from "@hugeicons/core-free-icons"
+import { useTranslations } from "next-intl"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { REFERENCE_TODAY } from "@/lib/analytics-filter"
@@ -18,13 +19,13 @@ import { cn } from "@/lib/utils"
 
 const FALLBACK_HOUR = 14
 
-function loadLevel(value: number): {
-  label: string
-  tone: "ok" | "moderate" | "high"
-} {
-  if (value >= 70) return { label: "Heavy", tone: "high" }
-  if (value >= 40) return { label: "Moderate", tone: "moderate" }
-  return { label: "Light", tone: "ok" }
+type LoadTone = "ok" | "moderate" | "high"
+type LoadKey = "heavy" | "moderate" | "light"
+
+function loadLevel(value: number): { key: LoadKey; tone: LoadTone } {
+  if (value >= 70) return { key: "heavy", tone: "high" }
+  if (value >= 40) return { key: "moderate", tone: "moderate" }
+  return { key: "light", tone: "ok" }
 }
 
 const TONE_DOT: Record<"ok" | "moderate" | "high", string> = {
@@ -40,6 +41,8 @@ const TONE_BG: Record<"ok" | "moderate" | "high", string> = {
 }
 
 export function RightNowStrip() {
+  const t = useTranslations("RightNow")
+  const tDays = useTranslations("Days")
   const [hour, setHour] = React.useState<number>(FALLBACK_HOUR)
   const [mounted, setMounted] = React.useState(false)
 
@@ -87,18 +90,22 @@ export function RightNowStrip() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2 text-sm">
-              <span className="font-medium">Right now</span>
+              <span className="font-medium">{t("rightNow")}</span>
               <span
                 className={cn(
                   "rounded-full px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide",
                   TONE_BG[level.tone],
                 )}
               >
-                {level.label}
+                {t(level.key)}
               </span>
             </div>
             <span className="text-xs text-muted-foreground">
-              Network load {current}% · {day}, {String(hour).padStart(2, "0")}:00
+              {t("networkLoad", {
+                value: current,
+                day: tDays(day),
+                time: `${String(hour).padStart(2, "0")}:00`,
+              })}
             </span>
           </div>
         </div>
@@ -107,14 +114,14 @@ export function RightNowStrip() {
           {upcoming && upcomingDelta !== null && upcomingDelta > 0 && (
             <span className="flex items-center gap-1.5">
               <HugeiconsIcon icon={AlertCircleIcon} className="size-3.5 text-amber-500" />
-              Next peak in {upcomingDelta}h
+              {t("nextPeak", { hours: upcomingDelta })}
               <span className="text-foreground/80">({upcoming.congestion}%)</span>
             </span>
           )}
           {dayPeak && (
             <span className="flex items-center gap-1.5">
               <HugeiconsIcon icon={Clock01Icon} className="size-3.5" />
-              Day peak {String(dayPeak.hour).padStart(2, "0")}:00
+              {t("dayPeak", { time: `${String(dayPeak.hour).padStart(2, "0")}:00` })}
               <span className="text-foreground/80">({dayPeak.congestion}%)</span>
             </span>
           )}

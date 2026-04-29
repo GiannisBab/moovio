@@ -3,6 +3,7 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Cancel01Icon, Layers01Icon, PauseIcon, PlayIcon, WorkHistoryIcon } from "@hugeicons/core-free-icons";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
+import { useTranslations } from "next-intl"
 import {
   Card,
   CardHeader,
@@ -52,11 +53,11 @@ type HistoricalPlaybackProps = {
   onTimePlayingChange: (playing: boolean) => void
 }
 
-const legendItems = [
-  { color: "#22c55e", label: "Free" },
-  { color: "#eab308", label: "Moderate" },
-  { color: "#ef4444", label: "Heavy" },
-  { color: "#991b1b", label: "Gridlock" },
+const legendItems: { color: string; key: "free" | "moderate" | "heavy" | "gridlock" }[] = [
+  { color: "#22c55e", key: "free" },
+  { color: "#eab308", key: "moderate" },
+  { color: "#ef4444", key: "heavy" },
+  { color: "#991b1b", key: "gridlock" },
 ]
 
 function FilterToggle({
@@ -98,54 +99,55 @@ function PanelContent({
   filters: MapFilters
   onFiltersChange: (filters: MapFilters) => void
 }) {
+  const t = useTranslations("LiveMap")
   return (
     <div className="space-y-4">
       {/* Layer toggles */}
       <div className="space-y-1">
         <FilterToggle
-          label="Congestion Points"
+          label={t("congestionPoints")}
           checked={filters.showCongestion}
           onChange={(v) =>
             onFiltersChange({ ...filters, showCongestion: v })
           }
         />
         <FilterToggle
-          label="Traffic Routes"
+          label={t("trafficRoutes")}
           checked={filters.showRoutes}
           onChange={(v) =>
             onFiltersChange({ ...filters, showRoutes: v })
           }
         />
         <FilterToggle
-          label="Vehicle Sensors"
+          label={t("vehicleSensors")}
           checked={filters.showVehicles}
           onChange={(v) =>
             onFiltersChange({ ...filters, showVehicles: v })
           }
         />
         <FilterToggle
-          label="Transit Stops"
+          label={t("transitStops")}
           checked={filters.showTransitStops}
           onChange={(v) =>
             onFiltersChange({ ...filters, showTransitStops: v })
           }
         />
         <FilterToggle
-          label="Incidents & Events"
+          label={t("incidents")}
           checked={filters.showIncidents}
           onChange={(v) =>
             onFiltersChange({ ...filters, showIncidents: v })
           }
         />
         <FilterToggle
-          label="Traffic Cameras"
+          label={t("trafficCameras")}
           checked={filters.showCameras}
           onChange={(v) =>
             onFiltersChange({ ...filters, showCameras: v })
           }
         />
         <FilterToggle
-          label="Traffic Heatmap"
+          label={t("trafficHeatmap")}
           checked={filters.showHeatmap}
           onChange={(v) =>
             onFiltersChange({ ...filters, showHeatmap: v })
@@ -156,12 +158,12 @@ function PanelContent({
       {/* Routes legend */}
       <div>
         <p className="text-[11px] uppercase tracking-wider font-medium text-muted-foreground/50 mb-2">
-          Routes
+          {t("routes")}
         </p>
         <div className="flex gap-2">
           {legendItems.map((item) => (
             <div
-              key={item.label}
+              key={item.key}
               className="flex flex-col items-center gap-1"
             >
               <span
@@ -169,7 +171,7 @@ function PanelContent({
                 style={{ backgroundColor: item.color }}
               />
               <span className="text-[10px] font-normal text-muted-foreground/70">
-                {item.label}
+                {t(item.key)}
               </span>
             </div>
           ))}
@@ -185,6 +187,7 @@ export function HistoricalPlaybackControl({
   timePlaying,
   onTimePlayingChange,
 }: HistoricalPlaybackProps) {
+  const t = useTranslations("LiveMap")
   const [expanded, setExpanded] = useState(false)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const isHistorical = timeHour !== null
@@ -239,7 +242,7 @@ export function HistoricalPlaybackControl({
             >
               <HugeiconsIcon icon={WorkHistoryIcon} className={cn("size-4", isHistorical && "text-amber-600 dark:text-amber-400")} strokeWidth={1.5} />
             </TooltipTrigger>
-            <TooltipContent side="right">Historical Playback</TooltipContent>
+            <TooltipContent side="right">{t("historicalPlayback")}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       ) : (
@@ -254,7 +257,7 @@ export function HistoricalPlaybackControl({
                   : "font-normal text-muted-foreground/70"
               )}
             >
-              {isHistorical ? formatHour(timeHour!) : "Live"}
+              {isHistorical ? formatHour(timeHour!) : t("live")}
             </span>
             <div className="flex items-center gap-1.5">
               {isHistorical && (
@@ -263,7 +266,7 @@ export function HistoricalPlaybackControl({
                   onClick={handleToggleMode}
                   className="text-[11px] font-medium tracking-[-0.01em] text-green-600 dark:text-green-400 transition-colors hover:text-green-700 dark:hover:text-green-300"
                 >
-                  Back to Live
+                  {t("backToLive")}
                 </button>
               )}
               <button
@@ -316,7 +319,7 @@ export function HistoricalPlaybackControl({
               )}
             </Button>
             <span className="text-[11px] font-normal tracking-[-0.01em] text-muted-foreground">
-              {isHistorical ? "Scrub through the day" : "Press play to start"}
+              {isHistorical ? t("scrubDay") : t("pressPlay")}
             </span>
           </div>
         </div>
@@ -331,6 +334,7 @@ export function MapOverlayPanel({
   filters,
   onFiltersChange,
 }: Props) {
+  const t = useTranslations("LiveMap")
   const isMobile = useIsMobile()
 
   const activeLayerCount = useMemo(() => {
@@ -365,7 +369,7 @@ export function MapOverlayPanel({
           </span>
         </TooltipTrigger>
         <TooltipContent side="right">
-          Map Layers & Filters
+          {t("layersAndFilters")}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -381,7 +385,7 @@ export function MapOverlayPanel({
             <DrawerHeader>
               <DrawerTitle className="flex items-center gap-2 text-[15px] font-medium tracking-[-0.01em]">
                 <HugeiconsIcon icon={Layers01Icon} className="size-4 text-muted-foreground/60" strokeWidth={1.5} />
-                Map Layers
+                {t("layers")}
               </DrawerTitle>
             </DrawerHeader>
             <div className="overflow-y-auto px-4 pb-4">
@@ -410,7 +414,7 @@ export function MapOverlayPanel({
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-[13px] font-medium tracking-[-0.01em]">
                 <HugeiconsIcon icon={Layers01Icon} className="size-3.5" strokeWidth={1.5} />
-                Map Layers
+                {t("layers")}
               </CardTitle>
               <Button
                 variant="ghost"

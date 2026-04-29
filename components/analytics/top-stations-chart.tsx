@@ -1,6 +1,7 @@
 "use client"
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { useTranslations } from "next-intl"
 
 import {
   Card,
@@ -15,21 +16,26 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import {
-  topStationsChartConfig,
+  buildTopStationsChartConfig,
   topStationsData,
 } from "@/lib/data/analytics-data"
+import { useDataLabel } from "@/components/i18n-provider"
 import { cn } from "@/lib/utils"
 
 export function TopStationsChart({ className }: { className?: string }) {
-  const sorted = [...topStationsData].sort((a, b) => b.ridership - a.ridership)
+  const t = useTranslations("TopStations")
+  const tChart = useTranslations("ChartLabels")
+  const dl = useDataLabel()
+  const topStationsChartConfig = buildTopStationsChartConfig(tChart)
+  const sorted = [...topStationsData]
+    .sort((a, b) => b.ridership - a.ridership)
+    .map((s) => ({ ...s, name: dl(s.name) }))
 
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Top Stations by Ridership</CardTitle>
-        <CardDescription>
-          Monthly ridership across the busiest transit stops
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer

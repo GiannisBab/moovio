@@ -3,20 +3,22 @@
 import * as React from "react"
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Alert01Icon } from "@hugeicons/core-free-icons";
+import { useTranslations } from "next-intl"
 import type { CongestionAlert } from "@/lib/data/dashboard-data"
 
-function greetingForHour(hour: number): string {
-  if (hour < 12) return "Good morning"
-  if (hour < 18) return "Good afternoon"
-  return "Good evening"
+function greetingKeyForHour(hour: number): "morning" | "afternoon" | "evening" {
+  if (hour < 12) return "morning"
+  if (hour < 18) return "afternoon"
+  return "evening"
 }
 
 export function WelcomeSection({ alerts }: { alerts: CongestionAlert[] }) {
-  const [greeting, setGreeting] = React.useState("Welcome")
+  const t = useTranslations("Welcome")
+  const [greeting, setGreeting] = React.useState(t("fallback"))
 
   React.useEffect(() => {
-    setGreeting(greetingForHour(new Date().getHours()))
-  }, [])
+    setGreeting(t(greetingKeyForHour(new Date().getHours())))
+  }, [t])
 
   const criticalCount = alerts.filter((a) => a.severity === "critical").length
   const warningCount = alerts.filter((a) => a.severity === "warning").length
@@ -28,22 +30,17 @@ export function WelcomeSection({ alerts }: { alerts: CongestionAlert[] }) {
         {criticalCount > 0 && (
           <>
             <HugeiconsIcon icon={Alert01Icon} className="size-3.5 text-red-600 dark:text-red-400" />
-            <span>
-              {criticalCount} critical alert{criticalCount !== 1 ? "s" : ""} need
-              {criticalCount === 1 ? "s" : ""} attention
-            </span>
+            <span>{t("criticalAlerts", { count: criticalCount })}</span>
           </>
         )}
         {criticalCount > 0 && warningCount > 0 && (
           <span className="mx-1">&middot;</span>
         )}
         {warningCount > 0 && (
-          <span>
-            {warningCount} warning{warningCount !== 1 ? "s" : ""} active
-          </span>
+          <span>{t("warningsActive", { count: warningCount })}</span>
         )}
         {criticalCount === 0 && warningCount === 0 && (
-          <span>All systems operating normally</span>
+          <span>{t("allNormal")}</span>
         )}
       </p>
     </div>

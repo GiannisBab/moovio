@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Area, AreaChart, ResponsiveContainer } from "recharts"
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useTranslations } from "next-intl"
 import {
   Car01Icon,
   DashboardSpeedIcon,
@@ -22,9 +23,11 @@ import {
 import type { DailyTripsPoint } from "@/lib/data/analytics-data"
 import { cn } from "@/lib/utils"
 
+type KpiKey = "trips" | "vehicles" | "avgSpeed" | "co2Saved"
+
 type Kpi = {
-  key: "trips" | "vehicles" | "avgSpeed" | "co2Saved"
-  title: string
+  key: KpiKey
+  titleKey: "totalTrips" | "activeVehicles" | "avgSpeed" | "co2Saved"
   value: string
   delta: number
   icon: typeof Car01Icon
@@ -57,7 +60,7 @@ function buildKpis(
   return [
     {
       key: "trips",
-      title: "Total Trips",
+      titleKey: "totalTrips",
       value: formatNumber(sum(current.map((d) => d.trips))),
       delta: deltaPct(sum(current.map((d) => d.trips)), sum(previous.map((d) => d.trips))),
       icon: Route01Icon,
@@ -66,7 +69,7 @@ function buildKpis(
     },
     {
       key: "vehicles",
-      title: "Active Vehicles",
+      titleKey: "activeVehicles",
       value: formatNumber(Math.round(average(current.map((d) => d.vehicles)))),
       delta: deltaPct(
         average(current.map((d) => d.vehicles)),
@@ -78,7 +81,7 @@ function buildKpis(
     },
     {
       key: "avgSpeed",
-      title: "Avg Speed",
+      titleKey: "avgSpeed",
       value: `${average(current.map((d) => d.avgSpeed)).toFixed(1)} km/h`,
       delta: deltaPct(
         average(current.map((d) => d.avgSpeed)),
@@ -90,7 +93,7 @@ function buildKpis(
     },
     {
       key: "co2Saved",
-      title: "CO₂ Saved",
+      titleKey: "co2Saved",
       value: `${sum(current.map((d) => d.co2Saved)).toFixed(1)} t`,
       delta: deltaPct(
         sum(current.map((d) => d.co2Saved)),
@@ -113,6 +116,7 @@ export function KpiCards({
   spark: DailyTripsPoint[]
 }) {
   const kpis = buildKpis(current, previous, spark)
+  const t = useTranslations("Kpi")
 
   return (
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -127,7 +131,7 @@ export function KpiCards({
             <Card size="sm" className="h-full transition-shadow duration-150 ease-out-quart group-hover/kpi:shadow-md">
               <CardHeader>
                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                  {kpi.title}
+                  {t(kpi.titleKey)}
                 </CardTitle>
                 <CardAction>
                   <div className="flex size-8 items-center justify-center rounded-lg bg-muted">
@@ -157,7 +161,7 @@ export function KpiCards({
                     {positive ? "+" : ""}
                     {kpi.delta.toFixed(1)}%
                   </span>
-                  <span className="text-muted-foreground">vs prev</span>
+                  <span className="text-muted-foreground">{t("vsPrev")}</span>
                 </div>
                 <div className="-mb-1 mt-3 h-9 w-full">
                   <ResponsiveContainer width="100%" height="100%">

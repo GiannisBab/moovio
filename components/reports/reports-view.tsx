@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 
 import {
   DEFAULT_FILTER,
@@ -18,6 +19,7 @@ import { ReportsKpis } from "@/components/reports/reports-kpis"
 import { ReportsTabs } from "@/components/reports/reports-tabs"
 
 export function ReportsView() {
+  const t = useTranslations("Reports")
   const [filter, setFilter] = React.useState<AnalyticsFilter>(DEFAULT_FILTER)
 
   const filteredDaily = React.useMemo(
@@ -42,10 +44,8 @@ export function ReportsView() {
     <div className="flex flex-col gap-6 p-4 md:p-6">
       <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:gap-4">
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-semibold tracking-tight">Reports</h1>
-          <p className="text-sm text-muted-foreground">
-            Browse, sort, and export tabular records for the selected period
-          </p>
+          <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
+          <p className="text-sm text-muted-foreground">{t("description")}</p>
         </div>
         <AnalyticsToolbar value={filter} onChange={setFilter} />
       </div>

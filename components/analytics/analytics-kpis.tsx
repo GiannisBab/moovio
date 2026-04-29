@@ -1,6 +1,7 @@
 "use client"
 
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useTranslations } from "next-intl"
 import {
   Car01Icon,
   DashboardSpeedIcon,
@@ -19,8 +20,10 @@ import {
 } from "@/components/ui/card"
 import type { DailyTripsPoint } from "@/lib/data/analytics-data"
 
+type KpiTitleKey = "totalTrips" | "activeVehicles" | "avgSpeed" | "co2Saved"
+
 type Kpi = {
-  title: string
+  titleKey: KpiTitleKey
   value: string
   delta: number
   icon: typeof Car01Icon
@@ -50,9 +53,10 @@ export function AnalyticsKpis({
   current: DailyTripsPoint[]
   previous: DailyTripsPoint[]
 }) {
+  const t = useTranslations("AnalyticsKpi")
   const kpis: Kpi[] = [
     {
-      title: "Total Trips",
+      titleKey: "totalTrips",
       value: formatNumber(sum(current.map((d) => d.trips))),
       delta: deltaPct(
         sum(current.map((d) => d.trips)),
@@ -61,7 +65,7 @@ export function AnalyticsKpis({
       icon: Route01Icon,
     },
     {
-      title: "Active Vehicles (avg)",
+      titleKey: "activeVehicles",
       value: formatNumber(Math.round(average(current.map((d) => d.vehicles)))),
       delta: deltaPct(
         average(current.map((d) => d.vehicles)),
@@ -70,7 +74,7 @@ export function AnalyticsKpis({
       icon: Car01Icon,
     },
     {
-      title: "Avg Speed",
+      titleKey: "avgSpeed",
       value: `${average(current.map((d) => d.avgSpeed)).toFixed(1)} km/h`,
       delta: deltaPct(
         average(current.map((d) => d.avgSpeed)),
@@ -79,7 +83,7 @@ export function AnalyticsKpis({
       icon: DashboardSpeedIcon,
     },
     {
-      title: "CO₂ Saved",
+      titleKey: "co2Saved",
       value: `${sum(current.map((d) => d.co2Saved)).toFixed(1)} t`,
       delta: deltaPct(
         sum(current.map((d) => d.co2Saved)),
@@ -94,10 +98,10 @@ export function AnalyticsKpis({
       {kpis.map((kpi) => {
         const positive = kpi.delta >= 0
         return (
-          <Card key={kpi.title} size="sm">
+          <Card key={kpi.titleKey} size="sm">
             <CardHeader>
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {kpi.title}
+                {t(kpi.titleKey)}
               </CardTitle>
               <CardAction>
                 <div className="flex size-8 items-center justify-center rounded-lg bg-muted">
@@ -126,7 +130,7 @@ export function AnalyticsKpis({
                   {positive ? "+" : ""}
                   {kpi.delta.toFixed(1)}%
                 </span>
-                <span className="text-muted-foreground">vs prev period</span>
+                <span className="text-muted-foreground">{t("vsPrev")}</span>
               </div>
             </CardContent>
           </Card>

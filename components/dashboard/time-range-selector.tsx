@@ -1,14 +1,11 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export type DashboardRange = "today" | "week" | "month"
 
-const ranges: { value: DashboardRange; label: string }[] = [
-  { value: "today", label: "Today" },
-  { value: "week", label: "This Week" },
-  { value: "month", label: "This Month" },
-]
+const RANGES: DashboardRange[] = ["today", "week", "month"]
 
 type Props = {
   value: DashboardRange
@@ -16,6 +13,7 @@ type Props = {
 }
 
 export function TimeRangeSelector({ value, onChange }: Props) {
+  const t = useTranslations("TimeRange")
   return (
     <ToggleGroup
       value={[value]}
@@ -25,9 +23,9 @@ export function TimeRangeSelector({ value, onChange }: Props) {
       variant="outline"
       size="sm"
     >
-      {ranges.map((r) => (
-        <ToggleGroupItem key={r.value} value={r.value}>
-          {r.label}
+      {RANGES.map((r) => (
+        <ToggleGroupItem key={r} value={r}>
+          {t(r)}
         </ToggleGroupItem>
       ))}
     </ToggleGroup>

@@ -1,0 +1,275 @@
+{
+  "Nav": {
+    "section": "Πλοήγηση",
+    "dashboard": "Πίνακας ελέγχου",
+    "liveMap": "Ζωντανός χάρτης",
+    "analytics": "Αναλυτικά στοιχεία",
+    "reports": "Αναφορές",
+    "predictions": "Προβλέψεις"
+  },
+  "Header": {
+    "home": "Αρχική",
+    "dashboard": "Πίνακας ελέγχου",
+    "liveMap": "Ζωντανός χάρτης",
+    "analytics": "Αναλυτικά στοιχεία",
+    "reports": "Αναφορές",
+    "predictions": "Προβλέψεις AI",
+    "search": "Αναζήτηση...",
+    "searchTitle": "Αναζήτηση",
+    "searchDescription": "Αναζήτηση σε σελίδες, ειδοποιήσεις και συμβάντα",
+    "searchPlaceholder": "Πληκτρολογήστε για αναζήτηση...",
+    "noResults": "Δεν βρέθηκαν αποτελέσματα.",
+    "groupPages": "Σελίδες",
+    "groupCongestion": "Ειδοποιήσεις συμφόρησης",
+    "groupIncidents": "Συμβάντα",
+    "notifications": "Ειδοποιήσεις",
+    "markAllRead": "Σήμανση όλων ως αναγνωσμένα",
+    "clearAll": "Εκκαθάριση όλων",
+    "noNotifications": "Δεν υπάρχουν ειδοποιήσεις"
+  },
+  "Welcome": {
+    "morning": "Καλημέρα",
+    "afternoon": "Καλημέρα",
+    "evening": "Καλησπέρα",
+    "fallback": "Καλώς ήρθατε",
+    "criticalAlerts": "{count, plural, =1 {# κρίσιμη ειδοποίηση χρειάζεται προσοχή} other {# κρίσιμες ειδοποιήσεις χρειάζονται προσοχή}}",
+    "warningsActive": "{count, plural, =1 {# προειδοποίηση ενεργή} other {# προειδοποιήσεις ενεργές}}",
+    "allNormal": "Όλα τα συστήματα λειτουργούν κανονικά"
+  },
+  "TimeRange": {
+    "today": "Σήμερα",
+    "week": "Αυτή η εβδομάδα",
+    "month": "Αυτός ο μήνας"
+  },
+  "Kpi": {
+    "totalTrips": "Σύνολο διαδρομών",
+    "activeVehicles": "Ενεργά οχήματα",
+    "avgSpeed": "Μέση ταχύτητα",
+    "co2Saved": "CO₂ που εξοικονομήθηκε",
+    "vsPrev": "έναντι προηγ."
+  },
+  "RightNow": {
+    "rightNow": "Αυτή τη στιγμή",
+    "heavy": "Υψηλή",
+    "moderate": "Μέτρια",
+    "light": "Χαμηλή",
+    "networkLoad": "Φόρτος δικτύου {value}% · {day}, {time}",
+    "nextPeak": "Επόμενη αιχμή σε {hours} ώρες",
+    "dayPeak": "Αιχμή ημέρας {time}"
+  },
+  "Days": {
+    "Mon": "Δευ",
+    "Tue": "Τρι",
+    "Wed": "Τετ",
+    "Thu": "Πεμ",
+    "Fri": "Παρ",
+    "Sat": "Σαβ",
+    "Sun": "Κυρ"
+  },
+  "CongestionAlerts": {
+    "title": "Ειδοποιήσεις συμφόρησης",
+    "description": "Ενεργά συμβάντα και προειδοποιήσεις",
+    "viewAll": "Προβολή όλων",
+    "critical": "Κρίσιμο",
+    "warning": "Προειδοποίηση",
+    "info": "Πληροφορία"
+  },
+  "TrafficFlow": {
+    "title": "Ροή κυκλοφορίας",
+    "description": "Ωριαίος αριθμός οχημάτων και μέση ταχύτητα"
+  },
+  "ModalSplit": {
+    "title": "Κατανομή μέσων",
+    "description": "Μέση κατανομή ανά μέσο μετακίνησης για την περίοδο",
+    "ofTrips": "των διαδρομών",
+    "car": "Αυτοκίνητο",
+    "bus": "Λεωφορείο",
+    "bike": "Ποδήλατο",
+    "walk": "Πεζή"
+  },
+  "Ridership": {
+    "title": "Τάσεις επιβατικής κίνησης",
+    "description": "Εβδομαδιαία χρήση δημόσιων συγκοινωνιών"
+  },
+  "Language": {
+    "label": "Γλώσσα",
+    "english": "English",
+    "greek": "Ελληνικά"
+  },
+  "Analytics": {
+    "title": "Αναλυτικά στοιχεία",
+    "description": "Τάσεις και απόδοση κινητικότητας για την επιλεγμένη περίοδο",
+    "exportCsv": "Εξαγωγή CSV",
+    "csvDate": "Ημερομηνία",
+    "csvTrips": "Διαδρομές",
+    "csvVehicles": "Οχήματα",
+    "csvAvgSpeed": "Μέση ταχύτητα (km/h)",
+    "csvCo2": "CO2 που εξοικονομήθηκε (t)"
+  },
+  "AnalyticsKpi": {
+    "totalTrips": "Σύνολο διαδρομών",
+    "activeVehicles": "Ενεργά οχήματα (μ.ο.)",
+    "avgSpeed": "Μέση ταχύτητα",
+    "co2Saved": "CO₂ που εξοικονομήθηκε",
+    "vsPrev": "έναντι προηγ. περιόδου"
+  },
+  "TripsTrend": {
+    "title": "Διαδρομές & οχήματα",
+    "description": "Ημερήσια σύνολα στο επιλεγμένο διάστημα"
+  },
+  "ModalSplitTrend": {
+    "title": "Κατανομή μέσων στον χρόνο",
+    "description": "Ποσοστό διαδρομών ανά μέσο μετακίνησης (%)"
+  },
+  "TopStations": {
+    "title": "Κορυφαίοι σταθμοί κατά επιβατική κίνηση",
+    "description": "Μηνιαία επιβατική κίνηση στους πιο πολυσύχναστους σταθμούς"
+  },
+  "RoutePerformance": {
+    "title": "Απόδοση διαδρομών",
+    "description": "Κορυφαίοι άξονες κατά όγκο, ταχύτητα και καθυστέρηση",
+    "route": "Διαδρομή",
+    "trips": "Διαδρομές",
+    "avgSpeed": "Μέση ταχύτητα (km/h)",
+    "delay": "Καθυστέρηση (λεπτά)",
+    "congestion": "Συμφόρηση"
+  },
+  "Heatmap": {
+    "title": "Χάρτης θερμότητας συμφόρησης",
+    "description": "Μέση συμφόρηση ανά ημέρα και ώρα",
+    "low": "Χαμηλή",
+    "high": "Υψηλή",
+    "congestion": "Συμφόρηση {value}%"
+  },
+  "DateRange": {
+    "selectRange": "Επιλέξτε εύρος",
+    "cancel": "Άκυρο",
+    "apply": "Εφαρμογή",
+    "last": "Τελευταίες {label}"
+  },
+  "Reports": {
+    "title": "Αναφορές",
+    "description": "Περιήγηση, ταξινόμηση και εξαγωγή εγγραφών για την επιλεγμένη περίοδο",
+    "exportCsv": "Εξαγωγή CSV",
+    "recordsInPeriod": "Εγγραφές στην περίοδο",
+    "openIncidents": "Ανοιχτά συμβάντα",
+    "avgResolution": "Μέσος χρόνος επίλυσης",
+    "ridershipRecords": "Εγγραφές επιβατικής κίνησης",
+    "recordsHint": "{daily} ημερήσιες · {incidents} συμβάντα",
+    "totalReportedHint": "{count} συνολικά",
+    "acrossResolved": "Από επιλυμένα συμβάντα",
+    "acrossModes": "Σε όλα τα μέσα μεταφοράς",
+    "tabDaily": "Ημερήσια σύνοψη",
+    "tabIncidents": "Συμβάντα",
+    "tabRidership": "Επιβατική κίνηση",
+    "tabCongestion": "Συμφόρηση",
+    "daysInPeriod": "{count, plural, =1 {# ημέρα στην τρέχουσα περίοδο} other {# ημέρες στην τρέχουσα περίοδο}}",
+    "incidentsReported": "{count, plural, =1 {# συμβάν αναφέρθηκε} other {# συμβάντα αναφέρθηκαν}}",
+    "ridershipEntries": "{count} εγγραφές επιβατικής κίνησης",
+    "congestionEvents": "{count, plural, =1 {# συμβάν συμφόρησης} other {# συμβάντα συμφόρησης}}",
+    "noRecords": "Χωρίς εγγραφές",
+    "showing": "Εμφάνιση {from}–{to} από {total}",
+    "open": "Ανοιχτό"
+  },
+  "ReportColumns": {
+    "date": "Ημερομηνία",
+    "totalTrips": "Σύνολο διαδρομών",
+    "avgSpeed": "Μέση ταχύτητα (km/h)",
+    "incidents": "Συμβάντα",
+    "status": "Κατάσταση",
+    "when": "Πότε",
+    "type": "Τύπος",
+    "location": "Τοποθεσία",
+    "severity": "Σοβαρότητα",
+    "duration": "Διάρκεια",
+    "resolved": "Επιλύθηκε",
+    "mode": "Μέσο",
+    "station": "Σταθμός",
+    "ridership": "Επιβατική κίνηση",
+    "changeVsPrev": "Δ έναντι προηγ.",
+    "peakHour": "Ώρα αιχμής",
+    "minutes": "{value} λεπτά"
+  },
+  "IncidentTypes": {
+    "accident": "Ατύχημα",
+    "roadwork": "Έργα οδοποιίας",
+    "closure": "Κλείσιμο οδού",
+    "event": "Εκδήλωση"
+  },
+  "Severity": {
+    "critical": "Κρίσιμο",
+    "warning": "Προειδοποίηση",
+    "info": "Πληροφορία"
+  },
+  "Status": {
+    "complete": "Ολοκληρώθηκε",
+    "partial": "Μερικό",
+    "pending": "Εκκρεμεί"
+  },
+  "LiveMap": {
+    "layers": "Επίπεδα χάρτη",
+    "layersAndFilters": "Επίπεδα & φίλτρα χάρτη",
+    "congestionPoints": "Σημεία συμφόρησης",
+    "trafficRoutes": "Διαδρομές κυκλοφορίας",
+    "vehicleSensors": "Αισθητήρες οχημάτων",
+    "transitStops": "Στάσεις μέσων μεταφοράς",
+    "incidents": "Συμβάντα & εκδηλώσεις",
+    "trafficCameras": "Κάμερες κυκλοφορίας",
+    "trafficHeatmap": "Χάρτης θερμότητας κυκλοφορίας",
+    "routes": "Διαδρομές",
+    "free": "Ελεύθερη",
+    "moderate": "Μέτρια",
+    "heavy": "Υψηλή",
+    "gridlock": "Πλήρης συμφόρηση",
+    "freeFlow": "Ελεύθερη ροή",
+    "kmh": "{value} km/h",
+    "kmhAvg": "{value} km/h μ.ο.",
+    "live": "Ζωντανά",
+    "backToLive": "Επιστροφή στη ζωντανή προβολή",
+    "historicalPlayback": "Ιστορική αναπαραγωγή",
+    "scrubDay": "Πλοήγηση στην ημέρα",
+    "pressPlay": "Πατήστε αναπαραγωγή",
+    "streamUnavailable": "Η ροή δεν είναι διαθέσιμη",
+    "vehicleBus": "Λεωφορείο",
+    "vehicleTaxi": "Ταξί",
+    "vehicleCar": "Αυτοκίνητο",
+    "vehicleSensor": "Αισθητήρας",
+    "metro": "Μετρό",
+    "busStop": "Στάση λεωφορείου",
+    "tram": "Τραμ",
+    "trolleybus": "Τρόλεϊ",
+    "wheelchairAccessible": "Προσβάσιμο σε αναπηρικό αμαξίδιο",
+    "eta": "ETA: {value}",
+    "lanesAffected": "{count, plural, =1 {# λωρίδα επηρεάζεται} other {# λωρίδες επηρεάζονται}}",
+    "delayMin": "+{value} λεπτά"
+  },
+  "Predictions": {
+    "title": "Προβλέψεις AI",
+    "description": "Έρχεται σύντομα η πρόβλεψη κινητικότητας με τη βοήθεια AI."
+  },
+  "ChartLabels": {
+    "trips": "Διαδρομές",
+    "vehicles": "Οχήματα",
+    "avgSpeed": "Μέση ταχύτητα (km/h)",
+    "avgSpeedShort": "Μέση ταχύτητα",
+    "ridership": "Επιβατική κίνηση",
+    "percentage": "Ποσοστό",
+    "car": "Αυτοκίνητο",
+    "bus": "Λεωφορείο",
+    "bike": "Ποδήλατο",
+    "walk": "Πεζή",
+    "metro": "Μετρό",
+    "tram": "Τραμ"
+  },
+  "RelativeTime": {
+    "today": "σήμερα",
+    "yesterday": "χθες",
+    "daysAgo": "{count, plural, =1 {# ημέρα πριν} other {# ημέρες πριν}}",
+    "weeksAgo": "{count, plural, =1 {# εβδομάδα πριν} other {# εβδομάδες πριν}}",
+    "minAgo": "{count, plural, =1 {πριν # λεπτό} other {πριν # λεπτά}}",
+    "hoursAgo": "{count, plural, =1 {πριν # ώρα} other {πριν # ώρες}}"
+  },
+  "AlertText": {
+    "peakDescription": "Αιχμή συμφόρησης στις {peak} · διάρκεια {duration} λεπτά"
+  }
+}

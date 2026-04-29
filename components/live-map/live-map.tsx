@@ -3,6 +3,8 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Bus01Icon, Car01Icon, DashboardSpeedIcon, RadioIcon, Route01Icon, TaxiIcon } from "@hugeicons/core-free-icons";
 import { useState, useCallback, useMemo } from "react"
+import { useTranslations } from "next-intl"
+import { useDataLabel } from "@/components/i18n-provider"
 import { Map, MapControls, MapPopup } from "@/components/ui/map"
 import { CongestionMarkers } from "./congestion-markers"
 import { TrafficRoutes, type SelectedRoute } from "./traffic-routes"
@@ -29,10 +31,10 @@ const DEFAULT_CENTER: [number, number] = [23.7275, 37.9838]
 const DEFAULT_ZOOM = 12
 
 const vehicleTypeConfig = {
-  bus: { icon: Bus01Icon, label: "Bus" },
-  taxi: { icon: TaxiIcon, label: "Taxi" },
-  car: { icon: Car01Icon, label: "Car" },
-  sensor: { icon: RadioIcon, label: "Sensor" },
+  bus: { icon: Bus01Icon, labelKey: "vehicleBus" as const },
+  taxi: { icon: TaxiIcon, labelKey: "vehicleTaxi" as const },
+  car: { icon: Car01Icon, labelKey: "vehicleCar" as const },
+  sensor: { icon: RadioIcon, labelKey: "vehicleSensor" as const },
 }
 
 export function LiveMap() {
@@ -168,14 +170,16 @@ export function LiveMap() {
   )
 }
 
-const congestionLevelLabels: Record<string, string> = {
-  free: "Free Flow",
-  moderate: "Moderate",
-  heavy: "Heavy",
-  gridlock: "Gridlock",
+const congestionLevelKeys: Record<TrafficRoute["congestionLevel"], "freeFlow" | "moderate" | "heavy" | "gridlock"> = {
+  free: "freeFlow",
+  moderate: "moderate",
+  heavy: "heavy",
+  gridlock: "gridlock",
 }
 
 function RoutePopupContent({ route }: { route: TrafficRoute }) {
+  const t = useTranslations("LiveMap")
+  const dl = useDataLabel()
   const level = route.congestionLevel
   const color = congestionLevelColors[level]
 
@@ -189,21 +193,22 @@ function RoutePopupContent({ route }: { route: TrafficRoute }) {
           <HugeiconsIcon icon={Route01Icon} className="size-4" style={{ color }} />
         </div>
         <div>
-          <p className="text-sm font-semibold">{route.name}</p>
+          <p className="text-sm font-semibold">{dl(route.name)}</p>
           <p className="text-[10px] text-muted-foreground" style={{ color }}>
-            {congestionLevelLabels[level]}
+            {t(congestionLevelKeys[level])}
           </p>
         </div>
       </div>
       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
         <HugeiconsIcon icon={DashboardSpeedIcon} className="size-3" />
-        {route.avgSpeed} km/h avg
+        {t("kmhAvg", { value: route.avgSpeed })}
       </div>
     </div>
   )
 }
 
 function VehiclePopupContent({ vehicle }: { vehicle: SelectedVehicle }) {
+  const t = useTranslations("LiveMap")
   const config = vehicleTypeConfig[vehicle.properties.type]
 
   return (
@@ -213,7 +218,7 @@ function VehiclePopupContent({ vehicle }: { vehicle: SelectedVehicle }) {
           <HugeiconsIcon icon={config.icon} className="size-4 text-blue-500" />
         </div>
         <div>
-          <p className="text-sm font-semibold">{config.label}</p>
+          <p className="text-sm font-semibold">{t(config.labelKey)}</p>
           <p className="text-[10px] text-muted-foreground">
             {vehicle.properties.id}
           </p>
@@ -221,7 +226,7 @@ function VehiclePopupContent({ vehicle }: { vehicle: SelectedVehicle }) {
       </div>
       <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
         <HugeiconsIcon icon={DashboardSpeedIcon} className="size-3" />
-        {vehicle.properties.speed} km/h
+        {t("kmh", { value: vehicle.properties.speed })}
       </div>
     </div>
   )

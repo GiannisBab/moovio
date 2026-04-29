@@ -1,6 +1,7 @@
 "use client"
 
 import { HugeiconsIcon } from "@hugeicons/react"
+import { useTranslations } from "next-intl"
 import {
   Alert01Icon,
   ChartLineData01Icon,
@@ -30,6 +31,7 @@ type Props = {
 }
 
 export function ReportsKpis({ daily, incidents, ridership, congestion }: Props) {
+  const t = useTranslations("Reports")
   const totalRecords =
     daily.length + incidents.length + ridership.length + congestion.length
   const openIncidents = incidents.filter((i) => i.resolvedAt === null).length
@@ -43,28 +45,28 @@ export function ReportsKpis({ daily, incidents, ridership, congestion }: Props) 
 
   const kpis = [
     {
-      title: "Records in Period",
+      title: t("recordsInPeriod"),
       value: totalRecords.toLocaleString(),
       icon: File02Icon,
-      hint: `${daily.length} daily · ${incidents.length} incidents`,
+      hint: t("recordsHint", { daily: daily.length, incidents: incidents.length }),
     },
     {
-      title: "Open Incidents",
+      title: t("openIncidents"),
       value: openIncidents.toString(),
       icon: Alert01Icon,
-      hint: `${incidents.length} total reported`,
+      hint: t("totalReportedHint", { count: incidents.length }),
     },
     {
-      title: "Avg Resolution",
+      title: t("avgResolution"),
       value: `${avgResolution} min`,
       icon: Clock01Icon,
-      hint: "Across resolved incidents",
+      hint: t("acrossResolved"),
     },
     {
-      title: "Ridership Records",
+      title: t("ridershipRecords"),
       value: ridership.length.toString(),
       icon: ChartLineData01Icon,
-      hint: "Across all transit modes",
+      hint: t("acrossModes"),
     },
   ]
 

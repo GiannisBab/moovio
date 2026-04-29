@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 
 import {
   DEFAULT_FILTER,
@@ -22,6 +23,7 @@ import { RoutePerformanceTable } from "@/components/analytics/route-performance-
 import { TopStationsChart } from "@/components/analytics/top-stations-chart"
 
 export function AnalyticsView() {
+  const t = useTranslations("Analytics")
   const [filter, setFilter] = React.useState<AnalyticsFilter>(DEFAULT_FILTER)
 
   const filteredTrips = React.useMemo(
@@ -49,11 +51,11 @@ export function AnalyticsView() {
         .toISOString()
         .slice(0, 10)}`,
       [
-        { key: "date", header: "Date" },
-        { key: "trips", header: "Trips" },
-        { key: "vehicles", header: "Vehicles" },
-        { key: "avgSpeed", header: "Avg Speed (km/h)" },
-        { key: "co2Saved", header: "CO2 Saved (t)" },
+        { key: "date", header: t("csvDate") },
+        { key: "trips", header: t("csvTrips") },
+        { key: "vehicles", header: t("csvVehicles") },
+        { key: "avgSpeed", header: t("csvAvgSpeed") },
+        { key: "co2Saved", header: t("csvCo2") },
       ],
       filteredTrips,
     )
@@ -63,16 +65,16 @@ export function AnalyticsView() {
     <div className="flex flex-col gap-6 p-4 md:p-6">
       <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:gap-4">
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-semibold tracking-tight">Analytics</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
           <p className="text-sm text-muted-foreground">
-            Mobility trends and performance for the selected period
+            {t("description")}
           </p>
         </div>
         <AnalyticsToolbar
           value={filter}
           onChange={setFilter}
           onExport={handleExport}
-          exportLabel="Export CSV"
+          exportLabel={t("exportCsv")}
         />
       </div>
 

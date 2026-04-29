@@ -1,0 +1,275 @@
+{
+  "Nav": {
+    "section": "Navigation",
+    "dashboard": "Dashboard",
+    "liveMap": "Live Map",
+    "analytics": "Analytics",
+    "reports": "Reports",
+    "predictions": "Predictions"
+  },
+  "Header": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "liveMap": "Live Map",
+    "analytics": "Analytics",
+    "reports": "Reports",
+    "predictions": "AI Predictions",
+    "search": "Search...",
+    "searchTitle": "Search",
+    "searchDescription": "Search pages, alerts, and incidents",
+    "searchPlaceholder": "Type to search...",
+    "noResults": "No results found.",
+    "groupPages": "Pages",
+    "groupCongestion": "Congestion Alerts",
+    "groupIncidents": "Incidents",
+    "notifications": "Notifications",
+    "markAllRead": "Mark all read",
+    "clearAll": "Clear all",
+    "noNotifications": "No notifications"
+  },
+  "Welcome": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "fallback": "Welcome",
+    "criticalAlerts": "{count, plural, =1 {# critical alert needs attention} other {# critical alerts need attention}}",
+    "warningsActive": "{count, plural, =1 {# warning active} other {# warnings active}}",
+    "allNormal": "All systems operating normally"
+  },
+  "TimeRange": {
+    "today": "Today",
+    "week": "This Week",
+    "month": "This Month"
+  },
+  "Kpi": {
+    "totalTrips": "Total Trips",
+    "activeVehicles": "Active Vehicles",
+    "avgSpeed": "Avg Speed",
+    "co2Saved": "CO₂ Saved",
+    "vsPrev": "vs prev"
+  },
+  "RightNow": {
+    "rightNow": "Right now",
+    "heavy": "Heavy",
+    "moderate": "Moderate",
+    "light": "Light",
+    "networkLoad": "Network load {value}% · {day}, {time}",
+    "nextPeak": "Next peak in {hours}h",
+    "dayPeak": "Day peak {time}"
+  },
+  "Days": {
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun"
+  },
+  "CongestionAlerts": {
+    "title": "Congestion Alerts",
+    "description": "Active incidents and warnings",
+    "viewAll": "View all",
+    "critical": "Critical",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "TrafficFlow": {
+    "title": "Traffic Flow",
+    "description": "Hourly vehicle count and average speed"
+  },
+  "ModalSplit": {
+    "title": "Modal Split",
+    "description": "Average mode share for the period",
+    "ofTrips": "of trips",
+    "car": "Car",
+    "bus": "Bus",
+    "bike": "Bike",
+    "walk": "Walk"
+  },
+  "Ridership": {
+    "title": "Ridership Trends",
+    "description": "Weekly public transport usage"
+  },
+  "Language": {
+    "label": "Language",
+    "english": "English",
+    "greek": "Ελληνικά"
+  },
+  "Analytics": {
+    "title": "Analytics",
+    "description": "Mobility trends and performance for the selected period",
+    "exportCsv": "Export CSV",
+    "csvDate": "Date",
+    "csvTrips": "Trips",
+    "csvVehicles": "Vehicles",
+    "csvAvgSpeed": "Avg Speed (km/h)",
+    "csvCo2": "CO2 Saved (t)"
+  },
+  "AnalyticsKpi": {
+    "totalTrips": "Total Trips",
+    "activeVehicles": "Active Vehicles (avg)",
+    "avgSpeed": "Avg Speed",
+    "co2Saved": "CO₂ Saved",
+    "vsPrev": "vs prev period"
+  },
+  "TripsTrend": {
+    "title": "Trips & Vehicles",
+    "description": "Daily totals across the selected window"
+  },
+  "ModalSplitTrend": {
+    "title": "Modal Split Over Time",
+    "description": "Share of trips by transport mode (%)"
+  },
+  "TopStations": {
+    "title": "Top Stations by Ridership",
+    "description": "Monthly ridership across the busiest transit stops"
+  },
+  "RoutePerformance": {
+    "title": "Route Performance",
+    "description": "Top corridors by volume, speed, and delay",
+    "route": "Route",
+    "trips": "Trips",
+    "avgSpeed": "Avg Speed (km/h)",
+    "delay": "Delay (min)",
+    "congestion": "Congestion"
+  },
+  "Heatmap": {
+    "title": "Congestion Heatmap",
+    "description": "Average congestion by day of week and hour",
+    "low": "Low",
+    "high": "High",
+    "congestion": "Congestion {value}%"
+  },
+  "DateRange": {
+    "selectRange": "Select a range",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "last": "Last {label}"
+  },
+  "Reports": {
+    "title": "Reports",
+    "description": "Browse, sort, and export tabular records for the selected period",
+    "exportCsv": "Export CSV",
+    "recordsInPeriod": "Records in Period",
+    "openIncidents": "Open Incidents",
+    "avgResolution": "Avg Resolution",
+    "ridershipRecords": "Ridership Records",
+    "recordsHint": "{daily} daily · {incidents} incidents",
+    "totalReportedHint": "{count} total reported",
+    "acrossResolved": "Across resolved incidents",
+    "acrossModes": "Across all transit modes",
+    "tabDaily": "Daily Summary",
+    "tabIncidents": "Incidents",
+    "tabRidership": "Ridership",
+    "tabCongestion": "Congestion",
+    "daysInPeriod": "{count, plural, =1 {# day in current period} other {# days in current period}}",
+    "incidentsReported": "{count, plural, =1 {# incident reported} other {# incidents reported}}",
+    "ridershipEntries": "{count} ridership entries",
+    "congestionEvents": "{count, plural, =1 {# congestion event} other {# congestion events}}",
+    "noRecords": "No records",
+    "showing": "Showing {from}–{to} of {total}",
+    "open": "Open"
+  },
+  "ReportColumns": {
+    "date": "Date",
+    "totalTrips": "Total Trips",
+    "avgSpeed": "Avg Speed (km/h)",
+    "incidents": "Incidents",
+    "status": "Status",
+    "when": "When",
+    "type": "Type",
+    "location": "Location",
+    "severity": "Severity",
+    "duration": "Duration",
+    "resolved": "Resolved",
+    "mode": "Mode",
+    "station": "Station",
+    "ridership": "Ridership",
+    "changeVsPrev": "Δ vs prev",
+    "peakHour": "Peak Hour",
+    "minutes": "{value} min"
+  },
+  "IncidentTypes": {
+    "accident": "Accident",
+    "roadwork": "Roadwork",
+    "closure": "Closure",
+    "event": "Event"
+  },
+  "Severity": {
+    "critical": "Critical",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "Status": {
+    "complete": "Complete",
+    "partial": "Partial",
+    "pending": "Pending"
+  },
+  "LiveMap": {
+    "layers": "Map Layers",
+    "layersAndFilters": "Map Layers & Filters",
+    "congestionPoints": "Congestion Points",
+    "trafficRoutes": "Traffic Routes",
+    "vehicleSensors": "Vehicle Sensors",
+    "transitStops": "Transit Stops",
+    "incidents": "Incidents & Events",
+    "trafficCameras": "Traffic Cameras",
+    "trafficHeatmap": "Traffic Heatmap",
+    "routes": "Routes",
+    "free": "Free",
+    "moderate": "Moderate",
+    "heavy": "Heavy",
+    "gridlock": "Gridlock",
+    "freeFlow": "Free Flow",
+    "kmh": "{value} km/h",
+    "kmhAvg": "{value} km/h avg",
+    "live": "Live",
+    "backToLive": "Back to Live",
+    "historicalPlayback": "Historical Playback",
+    "scrubDay": "Scrub through the day",
+    "pressPlay": "Press play to start",
+    "streamUnavailable": "Stream unavailable",
+    "vehicleBus": "Bus",
+    "vehicleTaxi": "Taxi",
+    "vehicleCar": "Car",
+    "vehicleSensor": "Sensor",
+    "metro": "Metro",
+    "busStop": "Bus Stop",
+    "tram": "Tram",
+    "trolleybus": "Trolleybus",
+    "wheelchairAccessible": "Wheelchair accessible",
+    "eta": "ETA: {value}",
+    "lanesAffected": "{count, plural, =1 {# lane affected} other {# lanes affected}}",
+    "delayMin": "+{value} min"
+  },
+  "Predictions": {
+    "title": "AI Predictions",
+    "description": "AI-powered mobility forecasting coming soon."
+  },
+  "ChartLabels": {
+    "trips": "Trips",
+    "vehicles": "Vehicles",
+    "avgSpeed": "Avg Speed (km/h)",
+    "avgSpeedShort": "Avg Speed",
+    "ridership": "Ridership",
+    "percentage": "Percentage",
+    "car": "Car",
+    "bus": "Bus",
+    "bike": "Bike",
+    "walk": "Walk",
+    "metro": "Metro",
+    "tram": "Tram"
+  },
+  "RelativeTime": {
+    "today": "today",
+    "yesterday": "yesterday",
+    "daysAgo": "{count, plural, =1 {# day ago} other {# days ago}}",
+    "weeksAgo": "{count, plural, =1 {# week ago} other {# weeks ago}}",
+    "minAgo": "{count, plural, =1 {# min ago} other {# min ago}}",
+    "hoursAgo": "{count, plural, =1 {# hour ago} other {# hours ago}}"
+  },
+  "AlertText": {
+    "peakDescription": "Peak congestion at {peak} · sustained for {duration} min"
+  }
+}

@@ -5,6 +5,7 @@ import { format } from "date-fns"
 import type { DateRange } from "react-day-picker"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Calendar01Icon } from "@hugeicons/core-free-icons"
+import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -29,6 +30,7 @@ type Props = {
 }
 
 export function DateRangePicker({ value, onChange, className }: Props) {
+  const t = useTranslations("DateRange")
   const [open, setOpen] = React.useState(false)
   const [draft, setDraft] = React.useState<DateRange | undefined>({
     from: value.range.from,
@@ -45,7 +47,9 @@ export function DateRangePicker({ value, onChange, className }: Props) {
   const label =
     value.preset === "custom"
       ? `${format(value.range.from, "MMM d")} – ${format(value.range.to, "MMM d, yyyy")}`
-      : `Last ${PRESET_OPTIONS.find((p) => p.value === value.preset)?.label}`
+      : t("last", {
+          label: PRESET_OPTIONS.find((p) => p.value === value.preset)?.label ?? "",
+        })
 
   const applyPreset = (preset: Exclude<AnalyticsPreset, "custom">) => {
     if (preset !== value.preset) {
@@ -103,7 +107,7 @@ export function DateRangePicker({ value, onChange, className }: Props) {
                 className="justify-start"
                 onClick={() => applyPreset(p.value)}
               >
-                Last {p.label}
+                {t("last", { label: p.label })}
               </Button>
             ))}
           </div>
@@ -120,7 +124,7 @@ export function DateRangePicker({ value, onChange, className }: Props) {
               <span className="text-xs text-muted-foreground">
                 {draft?.from && draft.to
                   ? `${format(draft.from, "MMM d")} – ${format(draft.to, "MMM d, yyyy")}`
-                  : "Select a range"}
+                  : t("selectRange")}
               </span>
               <div className="flex gap-2">
                 <Button
@@ -128,14 +132,14 @@ export function DateRangePicker({ value, onChange, className }: Props) {
                   size="sm"
                   onClick={() => setOpen(false)}
                 >
-                  Cancel
+                  {t("cancel")}
                 </Button>
                 <Button
                   size="sm"
                   disabled={!draft?.from || !draft.to}
                   onClick={applyCustom}
                 >
-                  Apply
+                  {t("apply")}
                 </Button>
               </div>
             </div>

@@ -49,10 +49,14 @@ export const dailyTripsData: DailyTripsPoint[] = (() => {
   return points
 })()
 
-export const dailyTripsChartConfig = {
-  trips: { label: "Trips", color: "var(--chart-1)" },
-  vehicles: { label: "Vehicles", color: "var(--chart-2)" },
-} satisfies ChartConfig
+type ChartLabelT = (key: string) => string
+
+export function buildDailyTripsChartConfig(t: ChartLabelT): ChartConfig {
+  return {
+    trips: { label: t("trips"), color: "var(--chart-1)" },
+    vehicles: { label: t("vehicles"), color: "var(--chart-2)" },
+  }
+}
 
 export type ModalSplitPoint = {
   date: string
@@ -83,12 +87,14 @@ export const modalSplitTrendData: ModalSplitPoint[] = (() => {
   return points
 })()
 
-export const modalSplitTrendChartConfig = {
-  car: { label: "Car", color: "var(--chart-1)" },
-  bus: { label: "Bus", color: "var(--chart-2)" },
-  bike: { label: "Bike", color: "var(--chart-3)" },
-  walk: { label: "Walk", color: "var(--chart-4)" },
-} satisfies ChartConfig
+export function buildModalSplitTrendChartConfig(t: ChartLabelT): ChartConfig {
+  return {
+    car: { label: t("car"), color: "var(--chart-1)" },
+    bus: { label: t("bus"), color: "var(--chart-2)" },
+    bike: { label: t("bike"), color: "var(--chart-3)" },
+    walk: { label: t("walk"), color: "var(--chart-4)" },
+  }
+}
 
 export type RoutePerformance = {
   id: string
@@ -168,6 +174,8 @@ export const topStationsData: StationRidership[] = [
   { id: "s10", name: "North Gateway", mode: "Metro", ridership: 43_980, changePct: 6.5 },
 ]
 
-export const topStationsChartConfig = {
-  ridership: { label: "Ridership", color: "var(--chart-1)" },
-} satisfies ChartConfig
+export function buildTopStationsChartConfig(t: ChartLabelT): ChartConfig {
+  return {
+    ridership: { label: t("ridership"), color: "var(--chart-1)" },
+  }
+}

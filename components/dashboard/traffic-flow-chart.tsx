@@ -1,6 +1,7 @@
 "use client"
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { useTranslations } from "next-intl"
 import {
   Card,
   CardHeader,
@@ -15,16 +16,19 @@ import {
 } from "@/components/ui/chart"
 import {
   trafficFlowData,
-  trafficFlowChartConfig,
+  buildTrafficFlowChartConfig,
 } from "@/lib/data/dashboard-data"
 import { cn } from "@/lib/utils"
 
 export function TrafficFlowChart({ className }: { className?: string }) {
+  const t = useTranslations("TrafficFlow")
+  const tChart = useTranslations("ChartLabels")
+  const trafficFlowChartConfig = buildTrafficFlowChartConfig(tChart)
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Traffic Flow</CardTitle>
-        <CardDescription>Hourly vehicle count and average speed</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={trafficFlowChartConfig} className="h-[300px] w-full">

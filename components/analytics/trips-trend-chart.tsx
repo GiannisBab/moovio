@@ -2,6 +2,7 @@
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { format } from "date-fns"
+import { useTranslations } from "next-intl"
 
 import {
   Card,
@@ -18,7 +19,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import {
-  dailyTripsChartConfig,
+  buildDailyTripsChartConfig,
   type DailyTripsPoint,
 } from "@/lib/data/analytics-data"
 import { cn } from "@/lib/utils"
@@ -31,14 +32,15 @@ export function TripsTrendChart({
   className?: string
 }) {
   const tickInterval = Math.max(0, Math.floor(data.length / 8))
+  const t = useTranslations("TripsTrend")
+  const tChart = useTranslations("ChartLabels")
+  const dailyTripsChartConfig = buildDailyTripsChartConfig(tChart)
 
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Trips & Vehicles</CardTitle>
-        <CardDescription>
-          Daily totals across the selected window
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer

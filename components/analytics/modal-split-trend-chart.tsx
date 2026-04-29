@@ -2,6 +2,7 @@
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { format } from "date-fns"
+import { useTranslations } from "next-intl"
 
 import {
   Card,
@@ -18,7 +19,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import {
-  modalSplitTrendChartConfig,
+  buildModalSplitTrendChartConfig,
   type ModalSplitPoint,
 } from "@/lib/data/analytics-data"
 import { cn } from "@/lib/utils"
@@ -31,12 +32,22 @@ export function ModalSplitTrendChart({
   className?: string
 }) {
   const tickInterval = Math.max(0, Math.floor(data.length / 6))
+  const t = useTranslations("ModalSplitTrend")
+  const tModes = useTranslations("ModalSplit")
+  const tChart = useTranslations("ChartLabels")
+  const modalSplitTrendChartConfig = buildModalSplitTrendChartConfig(tChart)
+  const modeLabels: Record<string, string> = {
+    car: tModes("car"),
+    bus: tModes("bus"),
+    bike: tModes("bike"),
+    walk: tModes("walk"),
+  }
 
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Modal Split Over Time</CardTitle>
-        <CardDescription>Share of trips by transport mode (%)</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer
@@ -75,8 +86,8 @@ export function ModalSplitTrendChart({
                             backgroundColor: `var(--color-${name as string})`,
                           }}
                         />
-                        <span className="text-muted-foreground capitalize">
-                          {name as string}
+                        <span className="text-muted-foreground">
+                          {modeLabels[name as string] ?? (name as string)}
                         </span>
                       </div>
                       <span className="font-mono font-medium tabular-nums">

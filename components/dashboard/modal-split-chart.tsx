@@ -1,6 +1,7 @@
 "use client"
 
 import { Pie, PieChart, Label } from "recharts"
+import { useTranslations } from "next-intl"
 import {
   Card,
   CardHeader,
@@ -15,7 +16,7 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart"
-import { modalSplitChartConfig } from "@/lib/data/dashboard-data"
+import { buildModalSplitChartConfig } from "@/lib/data/dashboard-data"
 import type { ModalSplitPoint } from "@/lib/data/analytics-data"
 import { cn } from "@/lib/utils"
 
@@ -25,12 +26,15 @@ function average(values: number[]): number {
   return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0
 }
 
-function buildSlices(data: ModalSplitPoint[]): Slice[] {
+function buildSlices(
+  data: ModalSplitPoint[],
+  labels: { car: string; bus: string; bike: string; walk: string },
+): Slice[] {
   return [
-    { mode: "Car", percentage: average(data.map((d) => d.car)), fill: "var(--chart-1)" },
-    { mode: "Bus", percentage: average(data.map((d) => d.bus)), fill: "var(--chart-2)" },
-    { mode: "Bike", percentage: average(data.map((d) => d.bike)), fill: "var(--chart-3)" },
-    { mode: "Walk", percentage: average(data.map((d) => d.walk)), fill: "var(--chart-4)" },
+    { mode: labels.car, percentage: average(data.map((d) => d.car)), fill: "var(--chart-1)" },
+    { mode: labels.bus, percentage: average(data.map((d) => d.bus)), fill: "var(--chart-2)" },
+    { mode: labels.bike, percentage: average(data.map((d) => d.bike)), fill: "var(--chart-3)" },
+    { mode: labels.walk, percentage: average(data.map((d) => d.walk)), fill: "var(--chart-4)" },
   ]
 }
 
@@ -41,13 +45,21 @@ export function ModalSplitChart({
   data: ModalSplitPoint[]
   className?: string
 }) {
-  const slices = buildSlices(data)
+  const t = useTranslations("ModalSplit")
+  const tChart = useTranslations("ChartLabels")
+  const slices = buildSlices(data, {
+    car: t("car"),
+    bus: t("bus"),
+    bike: t("bike"),
+    walk: t("walk"),
+  })
+  const modalSplitChartConfig = buildModalSplitChartConfig(tChart)
 
   return (
     <Card className={cn(className)}>
       <CardHeader>
-        <CardTitle>Modal Split</CardTitle>
-        <CardDescription>Average mode share for the period</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer
@@ -86,7 +98,7 @@ export function ModalSplitChart({
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground text-sm"
                         >
-                          of trips
+                          {t("ofTrips")}
                         </tspan>
                       </text>
                     )

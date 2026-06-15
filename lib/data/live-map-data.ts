@@ -1896,7 +1896,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 38.0030,
     name: "I/C D. Plakentias",
     direction: "Athens Airport / Elefsina",
-    streamUrl: "https://s76.ipcamlive.com/streams/4ckeqpcl2njaszath/stream.m3u8",
+    streamUrl: "https://s55.ipcamlive.com/streams/37bneswkzi8ptx1f7/stream.m3u8",
   },
   {
     id: "cam-2",
@@ -1904,7 +1904,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 37.9870,
     name: "I/C Papagou",
     direction: "Katechaki / Mesogeia–Vrilissia",
-    streamUrl: "https://s58.ipcamlive.com/streams/3azvk6w0mz4hyuldc/stream.m3u8",
+    streamUrl: "https://s91.ipcamlive.com/streams/5bhgp8zpqkoqc5mkd/stream.m3u8",
   },
   {
     id: "cam-3",
@@ -1912,7 +1912,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 38.0070,
     name: "The Mall Athens – Neratziotissa",
     direction: "Athens Airport / Elefsina",
-    streamUrl: "https://s74.ipcamlive.com/streams/4akvylcz5ox8fmics/stream.m3u8",
+    streamUrl: "https://s21.ipcamlive.com/streams/15spatcicvulakwdx/stream.m3u8",
   },
   {
     id: "cam-4",
@@ -1920,7 +1920,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 38.0220,
     name: "I/C Metamorfosi",
     direction: "Lamia & Piraeus / Elefsina / Athens Airport",
-    streamUrl: "https://s55.ipcamlive.com/streams/37cv3rq7yvutboh9j/stream.m3u8",
+    streamUrl: "https://s55.ipcamlive.com/streams/37c0pzo3eslhnrqt8/stream.m3u8",
   },
   {
     id: "cam-5",
@@ -1928,7 +1928,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 37.9010,
     name: "Koropi Toll Station",
     direction: "Athens Airport / Elefsina",
-    streamUrl: "https://s29.ipcamlive.com/streams/1d4a2ovcl1zfj0rdq/stream.m3u8",
+    streamUrl: "https://s44.ipcamlive.com/streams/2caybc5htr7s0hoo8/stream.m3u8",
   },
   {
     id: "cam-6",
@@ -1936,7 +1936,7 @@ export const trafficCameras: TrafficCamera[] = [
     latitude: 38.0320,
     name: "Roupaki Toll Station",
     direction: "Elefsina / Athens Airport",
-    streamUrl: "https://s29.ipcamlive.com/streams/1dnuilr71uxvxmgzp/stream.m3u8",
+    streamUrl: "https://s29.ipcamlive.com/streams/1dxilg8a7pm0ujg4u/stream.m3u8",
   },
 ]
 

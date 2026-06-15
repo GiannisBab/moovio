@@ -1,0 +1,1459 @@
+{
+  "tripsForecastData": [
+    {
+      "date": "2026-01-25",
+      "actual": 183112,
+      "predicted": 169206,
+      "band": [
+        150853,
+        188541
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-01-26",
+      "actual": 277137,
+      "predicted": 282380,
+      "band": [
+        263439,
+        300138
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-01-27",
+      "actual": 301295,
+      "predicted": 294744,
+      "band": [
+        275324,
+        312586
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-01-28",
+      "actual": 292819,
+      "predicted": 289942,
+      "band": [
+        272434,
+        308123
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-01-29",
+      "actual": 259355,
+      "predicted": 285415,
+      "band": [
+        265950,
+        303264
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-01-30",
+      "actual": 309736,
+      "predicted": 290352,
+      "band": [
+        272287,
+        310651
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-01-31",
+      "actual": 184883,
+      "predicted": 175773,
+      "band": [
+        155762,
+        195534
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-01",
+      "actual": 186130,
+      "predicted": 171966,
+      "band": [
+        153915,
+        192958
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-02",
+      "actual": 263368,
+      "predicted": 285140,
+      "band": [
+        267319,
+        304327
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-03",
+      "actual": 282268,
+      "predicted": 297505,
+      "band": [
+        278840,
+        316756
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-04",
+      "actual": 278281,
+      "predicted": 292702,
+      "band": [
+        274777,
+        310329
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-05",
+      "actual": 310660,
+      "predicted": 288175,
+      "band": [
+        268131,
+        307065
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-06",
+      "actual": 295047,
+      "predicted": 293113,
+      "band": [
+        275190,
+        311718
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-07",
+      "actual": 189665,
+      "predicted": 178533,
+      "band": [
+        160221,
+        198525
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-08",
+      "actual": 176495,
+      "predicted": 174726,
+      "band": [
+        154877,
+        193225
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-09",
+      "actual": 272756,
+      "predicted": 287900,
+      "band": [
+        269353,
+        308280
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-10",
+      "actual": 292216,
+      "predicted": 300265,
+      "band": [
+        282654,
+        318180
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-11",
+      "actual": 264361,
+      "predicted": 295462,
+      "band": [
+        276789,
+        314948
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-12",
+      "actual": 309209,
+      "predicted": 290935,
+      "band": [
+        272473,
+        309393
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-13",
+      "actual": 298416,
+      "predicted": 295873,
+      "band": [
+        276519,
+        314959
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-14",
+      "actual": 189945,
+      "predicted": 181293,
+      "band": [
+        163602,
+        199645
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-15",
+      "actual": 175708,
+      "predicted": 177486,
+      "band": [
+        158872,
+        196224
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-16",
+      "actual": 319990,
+      "predicted": 290660,
+      "band": [
+        270536,
+        308398
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-17",
+      "actual": 316064,
+      "predicted": 303025,
+      "band": [
+        285880,
+        322765
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-18",
+      "actual": 309937,
+      "predicted": 298222,
+      "band": [
+        279897,
+        316831
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-19",
+      "actual": 276192,
+      "predicted": 293695,
+      "band": [
+        275020,
+        311532
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-20",
+      "actual": 292762,
+      "predicted": 298633,
+      "band": [
+        279747,
+        315678
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-21",
+      "actual": 166376,
+      "predicted": 184053,
+      "band": [
+        164235,
+        203220
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-22",
+      "actual": 170748,
+      "predicted": 180246,
+      "band": [
+        161520,
+        198076
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-23",
+      "actual": 307274,
+      "predicted": 293420,
+      "band": [
+        275369,
+        311471
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-24",
+      "actual": 311527,
+      "predicted": 305785,
+      "band": [
+        285938,
+        324644
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-25",
+      "actual": 325377,
+      "predicted": 300982,
+      "band": [
+        283721,
+        319637
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-26",
+      "actual": 287736,
+      "predicted": 296455,
+      "band": [
+        277992,
+        315916
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-27",
+      "actual": 290949,
+      "predicted": 301393,
+      "band": [
+        282380,
+        320671
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-02-28",
+      "actual": 184408,
+      "predicted": 186813,
+      "band": [
+        168025,
+        206051
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-01",
+      "actual": 174344,
+      "predicted": 183007,
+      "band": [
+        162963,
+        200938
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-02",
+      "actual": 278153,
+      "predicted": 296180,
+      "band": [
+        277392,
+        314198
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-03",
+      "actual": 299490,
+      "predicted": 308545,
+      "band": [
+        291193,
+        327779
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-04",
+      "actual": 285051,
+      "predicted": 303743,
+      "band": [
+        284145,
+        322532
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-05",
+      "actual": 312345,
+      "predicted": 299215,
+      "band": [
+        279136,
+        319835
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-06",
+      "actual": 298847,
+      "predicted": 304153,
+      "band": [
+        284306,
+        322280
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-07",
+      "actual": 200504,
+      "predicted": 189573,
+      "band": [
+        171129,
+        208198
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-08",
+      "actual": 195890,
+      "predicted": 185767,
+      "band": [
+        166775,
+        204334
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-09",
+      "actual": 292929,
+      "predicted": 298940,
+      "band": [
+        279804,
+        317048
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-10",
+      "actual": 325179,
+      "predicted": 311305,
+      "band": [
+        292094,
+        329974
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-11",
+      "actual": 324103,
+      "predicted": 306503,
+      "band": [
+        288229,
+        324324
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-12",
+      "actual": 299162,
+      "predicted": 301975,
+      "band": [
+        283155,
+        320433
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-13",
+      "actual": 293635,
+      "predicted": 306913,
+      "band": [
+        287786,
+        326683
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-14",
+      "actual": 197404,
+      "predicted": 192333,
+      "band": [
+        172886,
+        209530
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-15",
+      "actual": 177057,
+      "predicted": 188527,
+      "band": [
+        170129,
+        209002
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-16",
+      "actual": 289810,
+      "predicted": 301701,
+      "band": [
+        283329,
+        319868
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-17",
+      "actual": 278448,
+      "predicted": 314065,
+      "band": [
+        296267,
+        332265
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-18",
+      "actual": 327205,
+      "predicted": 309263,
+      "band": [
+        289680,
+        327987
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-19",
+      "actual": 320235,
+      "predicted": 304735,
+      "band": [
+        285807,
+        323697
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-20",
+      "actual": 323324,
+      "predicted": 309673,
+      "band": [
+        291385,
+        327955
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-21",
+      "actual": 203742,
+      "predicted": 195093,
+      "band": [
+        175322,
+        213988
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-22",
+      "actual": 191674,
+      "predicted": 191287,
+      "band": [
+        172131,
+        209952
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-23",
+      "actual": 316572,
+      "predicted": 304461,
+      "band": [
+        286782,
+        322661
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-24",
+      "actual": 290307,
+      "predicted": 316825,
+      "band": [
+        299158,
+        336570
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-25",
+      "actual": 289249,
+      "predicted": 312023,
+      "band": [
+        292590,
+        331211
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-26",
+      "actual": 324552,
+      "predicted": 307495,
+      "band": [
+        289328,
+        325745
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-27",
+      "actual": 312726,
+      "predicted": 312433,
+      "band": [
+        293832,
+        331451
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-28",
+      "actual": 197917,
+      "predicted": 197853,
+      "band": [
+        179830,
+        216813
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-29",
+      "actual": 206092,
+      "predicted": 194047,
+      "band": [
+        175085,
+        212608
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-30",
+      "actual": 324763,
+      "predicted": 307221,
+      "band": [
+        288151,
+        326937
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-31",
+      "actual": 320204,
+      "predicted": 319585,
+      "band": [
+        300180,
+        339139
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-01",
+      "actual": 321133,
+      "predicted": 314783,
+      "band": [
+        295460,
+        335095
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-02",
+      "actual": 305475,
+      "predicted": 310255,
+      "band": [
+        291422,
+        328073
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-03",
+      "actual": 288620,
+      "predicted": 315193,
+      "band": [
+        295600,
+        333253
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-04",
+      "actual": 195322,
+      "predicted": 200613,
+      "band": [
+        181347,
+        219853
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-05",
+      "actual": 186865,
+      "predicted": 196807,
+      "band": [
+        178688,
+        215787
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-06",
+      "actual": 314349,
+      "predicted": 309981,
+      "band": [
+        291781,
+        328770
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-07",
+      "actual": 343445,
+      "predicted": 322345,
+      "band": [
+        304125,
+        340666
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-08",
+      "actual": 304240,
+      "predicted": 317543,
+      "band": [
+        298529,
+        335034
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-09",
+      "actual": 293469,
+      "predicted": 313015,
+      "band": [
+        293398,
+        330857
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-10",
+      "actual": 308372,
+      "predicted": 317953,
+      "band": [
+        298203,
+        336955
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-11",
+      "actual": 192016,
+      "predicted": 203374,
+      "band": [
+        184135,
+        222256
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-12",
+      "actual": 207132,
+      "predicted": 199567,
+      "band": [
+        181386,
+        219599
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-13",
+      "actual": 327868,
+      "predicted": 312741,
+      "band": [
+        295212,
+        331326
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-14",
+      "actual": 343176,
+      "predicted": 325106,
+      "band": [
+        306248,
+        343239
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-15",
+      "actual": 335994,
+      "predicted": 320303,
+      "band": [
+        300946,
+        339597
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-16",
+      "actual": 319769,
+      "predicted": 315776,
+      "band": [
+        297127,
+        334421
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-17",
+      "actual": 346937,
+      "predicted": 320714,
+      "band": [
+        301686,
+        338989
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-18",
+      "actual": 189238,
+      "predicted": 206134,
+      "band": [
+        187746,
+        225833
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-19",
+      "actual": 183706,
+      "predicted": 202327,
+      "band": [
+        183042,
+        220994
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-20",
+      "actual": 301231,
+      "predicted": 315501,
+      "band": [
+        297405,
+        332997
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-21",
+      "actual": 343319,
+      "predicted": 327866,
+      "band": [
+        309798,
+        346048
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-22",
+      "actual": 326757,
+      "predicted": 323063,
+      "band": [
+        304382,
+        343162
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-23",
+      "actual": 307489,
+      "predicted": 318536,
+      "band": [
+        301264,
+        337647
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-24",
+      "actual": 330469,
+      "predicted": 323474,
+      "band": [
+        304085,
+        342023
+      ],
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-25",
+      "actual": null,
+      "predicted": 208894,
+      "band": [
+        190240,
+        227228
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-26",
+      "actual": null,
+      "predicted": 205087,
+      "band": [
+        184202,
+        222835
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-27",
+      "actual": null,
+      "predicted": 318261,
+      "band": [
+        299556,
+        336906
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-28",
+      "actual": null,
+      "predicted": 330626,
+      "band": [
+        312316,
+        350315
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-29",
+      "actual": null,
+      "predicted": 325823,
+      "band": [
+        307541,
+        345113
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-30",
+      "actual": null,
+      "predicted": 321296,
+      "band": [
+        302393,
+        339268
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-01",
+      "actual": null,
+      "predicted": 326234,
+      "band": [
+        307297,
+        345654
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-02",
+      "actual": null,
+      "predicted": 211654,
+      "band": [
+        192170,
+        229189
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-03",
+      "actual": null,
+      "predicted": 207847,
+      "band": [
+        190117,
+        225065
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-04",
+      "actual": null,
+      "predicted": 321021,
+      "band": [
+        301610,
+        340506
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-05",
+      "actual": null,
+      "predicted": 333386,
+      "band": [
+        315316,
+        351452
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-06",
+      "actual": null,
+      "predicted": 328583,
+      "band": [
+        309729,
+        348260
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-07",
+      "actual": null,
+      "predicted": 324056,
+      "band": [
+        304556,
+        343463
+      ],
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-08",
+      "actual": null,
+      "predicted": 328994,
+      "band": [
+        308162,
+        348361
+      ],
+      "isFuture": true
+    }
+  ],
+  "modalForecastData": [
+    {
+      "date": "2026-03-26",
+      "car": 46.2,
+      "bus": 23.7,
+      "bike": 17.0,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-27",
+      "car": 45.6,
+      "bus": 24.4,
+      "bike": 16.9,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-28",
+      "car": 46.1,
+      "bus": 24.3,
+      "bike": 16.6,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-29",
+      "car": 45.9,
+      "bus": 24.1,
+      "bike": 17.1,
+      "walk": 12.8,
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-30",
+      "car": 45.3,
+      "bus": 24.4,
+      "bike": 17.2,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-03-31",
+      "car": 45.1,
+      "bus": 24.6,
+      "bike": 17.5,
+      "walk": 12.8,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-01",
+      "car": 45.2,
+      "bus": 24.2,
+      "bike": 17.4,
+      "walk": 13.1,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-02",
+      "car": 45.7,
+      "bus": 23.9,
+      "bike": 17.5,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-03",
+      "car": 45.0,
+      "bus": 24.6,
+      "bike": 17.4,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-04",
+      "car": 45.5,
+      "bus": 24.5,
+      "bike": 17.1,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-05",
+      "car": 45.3,
+      "bus": 24.3,
+      "bike": 17.6,
+      "walk": 12.8,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-06",
+      "car": 44.6,
+      "bus": 24.6,
+      "bike": 17.7,
+      "walk": 13.1,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-07",
+      "car": 44.3,
+      "bus": 24.8,
+      "bike": 17.9,
+      "walk": 12.9,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-08",
+      "car": 44.4,
+      "bus": 24.5,
+      "bike": 17.8,
+      "walk": 13.3,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-09",
+      "car": 44.8,
+      "bus": 24.2,
+      "bike": 17.9,
+      "walk": 13.1,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-10",
+      "car": 44.1,
+      "bus": 24.9,
+      "bike": 17.8,
+      "walk": 13.2,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-11",
+      "car": 44.6,
+      "bus": 24.8,
+      "bike": 17.4,
+      "walk": 13.2,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-12",
+      "car": 44.4,
+      "bus": 24.6,
+      "bike": 18.0,
+      "walk": 13.0,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-13",
+      "car": 43.7,
+      "bus": 24.9,
+      "bike": 18.1,
+      "walk": 13.3,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-14",
+      "car": 43.4,
+      "bus": 25.1,
+      "bike": 18.3,
+      "walk": 13.1,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-15",
+      "car": 43.5,
+      "bus": 24.8,
+      "bike": 18.2,
+      "walk": 13.5,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-16",
+      "car": 43.9,
+      "bus": 24.4,
+      "bike": 18.3,
+      "walk": 13.4,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-17",
+      "car": 43.3,
+      "bus": 25.2,
+      "bike": 18.2,
+      "walk": 13.4,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-18",
+      "car": 43.7,
+      "bus": 25.1,
+      "bike": 17.8,
+      "walk": 13.4,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-19",
+      "car": 43.4,
+      "bus": 24.9,
+      "bike": 18.4,
+      "walk": 13.3,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-20",
+      "car": 42.6,
+      "bus": 25.3,
+      "bike": 18.5,
+      "walk": 13.6,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-21",
+      "car": 42.3,
+      "bus": 25.5,
+      "bike": 18.8,
+      "walk": 13.4,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-22",
+      "car": 42.3,
+      "bus": 25.2,
+      "bike": 18.7,
+      "walk": 13.8,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-23",
+      "car": 42.7,
+      "bus": 24.8,
+      "bike": 18.8,
+      "walk": 13.7,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-24",
+      "car": 42.1,
+      "bus": 25.6,
+      "bike": 18.7,
+      "walk": 13.7,
+      "isFuture": false
+    },
+    {
+      "date": "2026-04-25",
+      "car": 42.5,
+      "bus": 25.5,
+      "bike": 18.3,
+      "walk": 13.7,
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-26",
+      "car": 42.2,
+      "bus": 25.3,
+      "bike": 18.9,
+      "walk": 13.6,
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-27",
+      "car": 41.4,
+      "bus": 25.7,
+      "bike": 19.1,
+      "walk": 13.9,
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-28",
+      "car": 41.0,
+      "bus": 25.9,
+      "bike": 19.3,
+      "walk": 13.7,
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-29",
+      "car": 41.0,
+      "bus": 25.6,
+      "bike": 19.2,
+      "walk": 14.1,
+      "isFuture": true
+    },
+    {
+      "date": "2026-04-30",
+      "car": 41.5,
+      "bus": 25.3,
+      "bike": 19.3,
+      "walk": 14.0,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-01",
+      "car": 40.9,
+      "bus": 26.0,
+      "bike": 19.2,
+      "walk": 14.0,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-02",
+      "car": 41.4,
+      "bus": 25.9,
+      "bike": 18.8,
+      "walk": 14.0,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-03",
+      "car": 41.0,
+      "bus": 25.7,
+      "bike": 19.4,
+      "walk": 13.9,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-04",
+      "car": 40.1,
+      "bus": 26.1,
+      "bike": 19.6,
+      "walk": 14.2,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-05",
+      "car": 39.8,
+      "bus": 26.4,
+      "bike": 19.8,
+      "walk": 14.1,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-06",
+      "car": 39.8,
+      "bus": 26.1,
+      "bike": 19.8,
+      "walk": 14.4,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-07",
+      "car": 40.3,
+      "bus": 25.7,
+      "bike": 19.8,
+      "walk": 14.3,
+      "isFuture": true
+    },
+    {
+      "date": "2026-05-08",
+      "car": 39.7,
+      "bus": 26.4,
+      "bike": 19.7,
+      "walk": 14.3,
+      "isFuture": true
+    }
+  ],
+  "anomalyEntries": [
+    {
+      "id": "kifisias-corridor",
+      "location": "Kifisias Ave (Marousi \u2192 Kifisia)",
+      "metric": "speed",
+      "observed": 22.4,
+      "expected": 37.8,
+      "unit": "km/h",
+      "zScore": -7.2,
+      "severity": "high"
+    },
+    {
+      "id": "attiki-odos",
+      "location": "Attiki Odos (Pallini)",
+      "metric": "congestion",
+      "observed": 78.0,
+      "expected": 55.3,
+      "unit": "%",
+      "zScore": 6.02,
+      "severity": "high"
+    },
+    {
+      "id": "monastiraki",
+      "location": "Monastiraki Hub",
+      "metric": "ridership",
+      "observed": 31200.0,
+      "expected": 26706.4,
+      "unit": "trips/day",
+      "zScore": 4.07,
+      "severity": "high"
+    },
+    {
+      "id": "syntagma",
+      "location": "Syntagma Metro",
+      "metric": "ridership",
+      "observed": 18420.0,
+      "expected": 24363.8,
+      "unit": "trips/day",
+      "zScore": -3.68,
+      "severity": "high"
+    },
+    {
+      "id": "piraeus-port",
+      "location": "Piraeus Port Stop",
+      "metric": "ridership",
+      "observed": 14800.0,
+      "expected": 15973.2,
+      "unit": "trips/day",
+      "zScore": -1.87,
+      "severity": "medium"
+    }
+  ],
+  "modelMetadata": {
+    "algorithm": "Prophet (additive, weekly seasonality)",
+    "trainedOn": "Synthetic mobility series \u00b7 90 days",
+    "trainingWindowDays": 90,
+    "horizonDays": 14,
+    "mape": 5.48,
+    "rmse": 16653,
+    "lastUpdated": "2026-04-24"
+  }
+}

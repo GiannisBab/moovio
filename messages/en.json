@@ -245,7 +245,69 @@
   },
   "Predictions": {
     "title": "AI Predictions",
-    "description": "AI-powered mobility forecasting coming soon."
+    "description": "Forecasted mobility for the next 14 days, generated from a Prophet time-series model trained on the platform's historical data.",
+    "modelBadge": "Prophet · Daily forecast"
+  },
+  "PredictionsKpi": {
+    "tomorrowTrips": "Predicted Trips Tomorrow",
+    "vsToday": "vs latest actual",
+    "peakDay": "Predicted Peak Day",
+    "peakDayHint": "{trips} trips expected",
+    "modelAccuracy": "Model Accuracy",
+    "accuracyHint": "100% − MAPE on validation",
+    "anomalies": "Active Anomalies",
+    "anomaliesHint": "Stations deviating from baseline"
+  },
+  "TripsForecast": {
+    "title": "Trips Forecast",
+    "description": "Daily total trips — actual vs predicted with 80% confidence interval.",
+    "today": "Forecast cutoff",
+    "forecastBadge": "forecast",
+    "legendActual": "Actual",
+    "legendPredicted": "Predicted",
+    "legendBand": "80% confidence"
+  },
+  "ModalForecast": {
+    "title": "Modal Split Forecast",
+    "description": "Predicted share of trips by transport mode over the forecast horizon.",
+    "today": "Forecast cutoff",
+    "forecastBadge": "forecast"
+  },
+  "PredictionsChart": {
+    "actual": "Actual",
+    "predicted": "Predicted",
+    "confidence": "80% Confidence",
+    "car": "Car",
+    "bus": "Bus",
+    "bike": "Bike",
+    "walk": "Walk"
+  },
+  "AnomalyWatchlist": {
+    "title": "Anomaly Watchlist",
+    "description": "Locations where observed values diverge from the model's expected baseline.",
+    "observedVsExpected": "{observed} vs {expected} expected"
+  },
+  "AnomalyMetric": {
+    "ridership": "Ridership",
+    "speed": "Avg Speed",
+    "congestion": "Congestion"
+  },
+  "AnomalySeverity": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "ModelMeta": {
+    "title": "Model Details",
+    "description": "Pipeline metadata and validation metrics.",
+    "algorithm": "Algorithm",
+    "trainingData": "Training data",
+    "trainingWindow": "Training window",
+    "horizon": "Forecast horizon",
+    "mape": "MAPE",
+    "rmse": "RMSE",
+    "lastUpdated": "Last updated",
+    "days": "{count, plural, =1 {# day} other {# days}}"
   },
   "ChartLabels": {
     "trips": "Trips",
